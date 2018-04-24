@@ -1,0 +1,11 @@
+ <%= form_for @user do |form| %>
+    <%= render partial: '/users/form', object: form %>
+
+    <div class="text-field">
+  <%= form.label :about_me %>
+  <%= form.text_field :about_me, type: 'About Me' %>
+</div>
+
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
