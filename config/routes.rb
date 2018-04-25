@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
+  get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   get "/sign_up" => "clearance/users#new", as: "sign_up"
   root "welcome#index"

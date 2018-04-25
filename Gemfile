@@ -16,6 +16,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'clearance'
 gem 'bootstrap', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'figaro'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
 
 group :development, :test do

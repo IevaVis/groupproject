@@ -15,7 +15,12 @@
 
                <div class="other-links">
 
-                  <p>Already have an account? <%= link_to t(".sign_in!"), sign_in_path %></p>
+                <%= link_to "/auth/google_oauth2", :class => "btn btn-outline-secondary btn-block" do %>
+                 <i class="fab fa-google"></i> <%= "Sign up with Google" %>
+                  <% end %>
+
+
+                  <br/><p>Already have an account? <%= link_to t(".sign_in!"), sign_in_path %></p>
 
                </div>
 
