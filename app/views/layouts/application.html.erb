@@ -4,13 +4,14 @@
  <%= csrf_meta_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
 </head>
 
 
 <body>
   <div id="header">
     <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <%= button_to t(".sign_out"), session_path, method: :delete %>
     <% else -%>
   
   <div class="dropdown">
@@ -19,7 +20,7 @@
   </a>
   <ul class="dropdown-menu">
     <li><%= link_to t(".sign_in"), sign_in_path %></li>
-    <li><%= link_to t(".sign_up"), sign_up_path %></li>
+    <li><%= link_to t(".sign_up"), sign_up_path(role: "regular") %></li>
   </ul>
 </div>
 
@@ -30,7 +31,7 @@
   </a>
   <ul class="dropdown-menu">
     <li><%= link_to t(".sign_in"), sign_in_path %></li>
-    <li><%= link_to t(".sign_up"), sign_up_path %></li>
+    <li><%= link_to t(".sign_up"), sign_up_path(role: "expert") %></li>
   </ul>
 </div>
     <% end -%>
@@ -41,8 +42,6 @@
       <div id="flash_<%= key %>"><%=h value %></div>
     <% end %>
   </div>
-
-
 
 
 

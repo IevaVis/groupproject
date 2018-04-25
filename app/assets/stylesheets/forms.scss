@@ -1,0 +1,30 @@
+
+@-webkit-keyframes autofill {
+    to {
+        color: #666;
+        background: transparent;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+.login-form{
+	margin-top: 60px;
+	box-shadow: 0px 0px 10px 1px grey;
+	border-radius: 5px;
+	padding-bottom: 20px;
+	
+}
+
+.title{
+	background: #007bbf;
+	padding: 10px;
+	text-align: center;
+	color:#fff;
+	border-radius: 0px 0px 10px 10px;
+}
+
+
