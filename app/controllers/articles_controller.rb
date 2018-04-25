@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  # require 'uri-open'
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :confirm_signed_in, only: [:new, :create]
   before_action :noko_parse, only: [:create]
@@ -73,6 +72,7 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params[:article][:tags] = params[:article][:tags].split(",") unless params[:article][:tags].blank?
+      # p "final params", params[:article]
       params.require(:article).permit(:user_id, :link, :title, :image, :is_active, :tags => [])
     end
 
@@ -84,7 +84,6 @@ class ArticlesController < ApplicationController
     end
 
     def file_upload
-      p params[:article][:image]
       if !params[:article][:image].blank?
         uploader = AvatarUploader.new
         uploader.store!(params[:article][:image])
@@ -96,8 +95,11 @@ class ArticlesController < ApplicationController
         doc = Nokogiri::HTML(open(params[:article][:link]))
         contents = doc.search("meta[property='og:title']", "meta[property='og:image']").map { |n| n["content"] }
         params[:article][:title] = contents[0]
+        # params[:article][:image] = contents[1].split("/")[-1] #this way of getting the article's img might not work in some cases
         params[:article][:image] = contents[1]
-        file_upload
+
+        # File.open(contents[1])
+        # file_upload
       else
         redirect_to new_article_path, :flash => {:error => "Error creating article"}
       end
