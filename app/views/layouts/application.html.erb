@@ -35,8 +35,8 @@
                     Member
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <%= link_to t(".sign_in"), sign_in_path, class: 'dropdown-item' %>
-                      <%= link_to t(".sign_up"), sign_up_path, class: 'dropdown-item' %>
+                      <%= link_to t(".sign_in"), sign_in_path(role: "regular"), class: 'dropdown-item' %>
+                      <%= link_to t(".sign_up"), sign_up_path(role: "regular"), class: 'dropdown-item' %>
                     </div>
                   </li>
                   <!-- Expert Link -->
@@ -45,8 +45,8 @@
                     Expert
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <%= link_to t(".sign_in"), sign_in_path, class: 'dropdown-item' %>
-                      <%= link_to t(".sign_up"), sign_up_path, class: 'dropdown-item' %>
+                      <%= link_to t(".sign_in"), sign_in_path(role: "expert"), class: 'dropdown-item' %>
+                      <%= link_to t(".sign_up"), sign_up_path(role: "expert"), class: 'dropdown-item' %>
                     </div>
                   </li>
                 
