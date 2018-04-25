@@ -1,23 +1,30 @@
 
+<div class="form-group">
 <%= form.hidden_field :role, value: params[:role] %>
+</div>
 
-<div class="text-field">
+<div class="form-group">
   <%= form.label :first_name %>
-  <%= form.text_field :first_name, type: 'First Name' %>
+  <%= form.text_field :first_name, type:'text', :class => "form-control", required: true %>
 </div>
 
-<div class="text-field">
+<div class="form-group">
   <%= form.label :last_name %>
-  <%= form.text_field :last_name, type: 'Last Name' %>
+  <%= form.text_field :last_name, type: 'text', :class => "form-control", required: true %>
 </div>
 
 
-<div class="text-field">
+<div class="form-group">
   <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
+  <%= form.text_field :email, type: 'email', :class => "form-control", required: true %>
 </div>
 
-<div class="password-field">
+<div class="form-group">
   <%= form.label :password %>
-  <%= form.password_field :password %>
+  <%= form.password_field :password, type: 'password', :class => "form-control", required: true %>
 </div>
+
+<div class="submit-field">
+      <%= form.submit 'Submit', :class => "btn btn-primary btn-block" %>
+</div>
+
