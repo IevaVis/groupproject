@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  require 'uri-open'
+  # require 'uri-open'
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :confirm_signed_in, only: [:new, :create]
   before_action :noko_parse, only: [:create]
@@ -72,20 +72,35 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.fetch(:article, {})
+      params[:article][:tags] = params[:article][:tags].split(",") unless params[:article][:tags].blank?
+      params.require(:article).permit(:user_id, :link, :title, :image, :is_active, :tags => [])
     end
 
     # Make sure we have a user signed in
     def confirm_signed_in
-      if !current_user.signed_in?
+      if !signed_in?
         redirect_to root_path
       end
     end
 
-    # def noko_parse
-    #   if !params[:article][:link].blank?
-    #     doc = Nokogiri::HTML(open(params[:article][:link]))
-          # contents = doc.search("meta[property='og:title']", "meta[property='og:image']").map { |n| n["content"] }
-    #
+    def file_upload
+      p params[:article][:image]
+      if !params[:article][:image].blank?
+        uploader = AvatarUploader.new
+        uploader.store!(params[:article][:image])
+      end
+    end
+
+    def noko_parse
+      if !params[:article][:link].blank?
+        doc = Nokogiri::HTML(open(params[:article][:link]))
+        contents = doc.search("meta[property='og:title']", "meta[property='og:image']").map { |n| n["content"] }
+        params[:article][:title] = contents[0]
+        params[:article][:image] = contents[1]
+        file_upload
+      else
+        redirect_to new_article_path, :flash => {:error => "Error creating article"}
+      end
+    end
 
 end

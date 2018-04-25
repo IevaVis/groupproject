@@ -9,15 +9,23 @@
       <% end %>
       </ul>
     </div>
-  <% elsif current_user.signed_in? %>
+  <% elsif signed_in? %>
 
-    <% form.label :link %>
-    <% form.text_field :link, class: "form-control mr-sm-1 field" %>
+    <%= form.label :link %>
+    <%= form.text_field :link, class: "form-control mr-sm-1 field" %>
+
+    <%= form.label :tags, "Tags (separate with comma)" %>
+    <%= form.text_field :tags, class: "form-control mr-sm-1 field" %>
+
+    <%= form.hidden_field :image %>
+    <%= form.hidden_field :title %>
+    <%= form.hidden_field :is_active, :value => false %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
 
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Add article" %>
   </div>
 <% end %>
 
