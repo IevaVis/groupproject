@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
+  require 'uri-open'
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_signed_in, only: [:new, :create]
+  before_action :noko_parse, only: [:create]
 
   # GET /articles
   # GET /articles.json
@@ -71,4 +74,18 @@ class ArticlesController < ApplicationController
     def article_params
       params.fetch(:article, {})
     end
+
+    # Make sure we have a user signed in
+    def confirm_signed_in
+      if !current_user.signed_in?
+        redirect_to root_path
+      end
+    end
+
+    # def noko_parse
+    #   if !params[:article][:link].blank?
+    #     doc = Nokogiri::HTML(open(params[:article][:link]))
+          # contents = doc.search("meta[property='og:title']", "meta[property='og:image']").map { |n| n["content"] }
+    #
+
 end
