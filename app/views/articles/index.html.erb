@@ -23,10 +23,16 @@
             <% article.tags.each do |tag| %>
               <span class="article-tag badge badge-primary"><%= tag %></span>
             <% end %>
+
+            <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
+            <% if article_owner?(article) %>
+              <% form_for article, url: articles_path, method: "get" do |form| %>
+              <% end %>
+            <% end %>
           </div>
           <span><%= link_to 'Show', article %></span> |
-          <span><%= link_to 'Edit', edit_article_path(article) %></span> |
-          <span><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+          <span><%= link_to 'Edit', edit_article_path(article) if article_owner?(article) %></span> |
+          <span><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
         </div>
       <% end %>
     <% end -%>
