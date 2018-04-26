@@ -1,4 +1,30 @@
-<%= link_to 'Edit Profile', edit_user_path(@user) %>	
-<%= link_to 'Go To Homepage', root_path %>
+
+
+<div class="jumbotron">
+	<div class="user-info">
+
+		<% if @user.avatar.present? %>
+			<%= image_tag @user.avatar, :class => "user-profile-image" %>
+		<% else %>
+			<img src="/assets/defaultpicture.png", class="user-profile-image">
+		<% end %>
+	
+
+	
+	<div class="user-name">
+		<div><%=@user.name %></div>
+	</div>
+	<div class="user-links">
+	<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary" %>	
+	<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary" %>
+	<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary" %>
+	</div>
+
+</div>
+</div>
+
+	<div>About me: <%= @user.about_me %></div><br/>
+
+
 
 

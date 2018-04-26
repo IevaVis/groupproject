@@ -11,6 +11,17 @@ input:-webkit-autofill {
     -webkit-animation-fill-mode: both;
 }
 
+::placeholder {
+    color: #e6e6e6 !important;
+    opacity: 1; 
+}
+
+label.required:after {
+    content: " *";
+    
+}
+
+
 .login-form{
 	margin-top: 60px;
 	box-shadow: 0px 0px 10px 1px grey;
@@ -20,11 +31,39 @@ input:-webkit-autofill {
 }
 
 .title{
-	background: #007bbf;
+	background: cornflowerblue;
 	padding: 10px;
 	text-align: center;
 	color:#fff;
 	border-radius: 0px 0px 10px 10px;
 }
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 18px;
+    font-weight: 300;
+    color: grey;
+    display: inline-block;
+    border-radius: 2px;
+   
+}
+
+
+.inputfile + label {
+	cursor: pointer; 
+}
+
+
+
+
+
 
 

@@ -4,42 +4,73 @@
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <% if signed_in? -%>
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active" >
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">        
 
-              <%= link_to t(".sign_out"), sign_out_path, method: :delete , class: 'nav-link'  %>
+        <!-- How it works come in here -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active" >
+              <!-- sign_in path will be a placeholder for how it works -->
+              <%= link_to t("How it Works"), sign_in_path, class: 'nav-link'  %>
+
             </li>
-          </ul>
-        <% else %>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Member
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to t(".sign_in"), sign_in_path, class: 'dropdown-item' %>
-                <%= link_to t(".sign_up"), sign_up_path, class: 'dropdown-item' %>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Expert
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to t(".sign_in"), sign_in_path, class: 'dropdown-item' %>
-                <%= link_to t(".sign_up"), sign_up_path, class: 'dropdown-item' %>
-              </div>
-            </li>
-          </ul>
-        <% end %>
+              
+              <% if signed_in? -%>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active" >
+
+                    <%= link_to t(".sign_out"), session_path, method: :delete , class: 'nav-link'  %>
+                  </li>
+                </ul>
+              <% else %>
+                  <!-- Member Link -->
+               
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Member
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <%= link_to t(".sign_in"), sign_in_path(role: "regular"), class: 'dropdown-item' %>
+                      <%= link_to t(".sign_up"), sign_up_path(role: "regular"), class: 'dropdown-item' %>
+                    </div>
+                  </li>
+                  <!-- Expert Link -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Expert
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <%= link_to t(".sign_in"), sign_in_path(role: "expert"), class: 'dropdown-item' %>
+                      <%= link_to t(".sign_up"), sign_up_path(role: "expert"), class: 'dropdown-item' %>
+                    </div>
+                  </li>
+                
+              <% end %>
+
+        </ul>
+
+          <!-- Search Form for articles -->
+        <!--   <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+           -->
+          <!-- needs model and controller to -->
+
+          <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+               <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+                 <%= submit_tag "Search", :name => nil %>
+            <% end %>
+         
+
+          <!-- form ends here -->
       </div>
     </nav>
 
