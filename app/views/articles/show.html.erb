@@ -1,18 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h3 id="article-title"><%= @article.title %></h3>
-
-<div>
-  <% p @article, @article.image %>
-  <% if !@article.image.nil? %>
-    <%= image_tag @article.image, id: "article-image", height: "300", width: "400" %>
-  <% end %>
+<div id="article">
+  <div id="article-heading-outline">
+    <h3 id="article-heading"><%= @article.title %></h3>
+  </div>
+  <div id="article-image-outline">
+    <div>
+      <% if !@article.image.nil? %>
+        <%= image_tag @article.image, id: "article-image", class: "img-fluid rounded", height: "300", width: "400" %>
+      <% end %>
+    </div>
+  </div>
+  <div id="tags">
+    <% @article.tags.each do |tag| %>
+      <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
+    <% end %>
+  </div>
 </div>
-<% @article.tags.each do |tag| %>
-  <span><%= "#{tag}" %></span>
-<% end %>
 
-
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Edit', edit_article_path(@article) if signed_in? && current_user.id == @article.user_id %> |
 <%= link_to 'Back', articles_path %>
+
+<style>
+
+  #article {
+    background-color: rgba(150, 150, 150, .1);
+    position: relative;
+    left: 10vw;
+    width: 50vw;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+</style>
