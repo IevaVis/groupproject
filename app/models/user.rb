@@ -1,16 +1,16 @@
 class User < ApplicationRecord
   include Clearance::User
-    enum role: [:regular, :expert, :admin]
-   	has_many :authentications, dependent: :destroy
-    mount_uploader :avatar, AvatarUploader
-  	validates :first_name, :last_name, presence: true
-	validates :email, uniqueness: true
-	validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  enum role: [:regular, :expert, :admin]
+ 	has_many :authentications, dependent: :destroy
+  mount_uploader :avatar, AvatarUploader
+	validates :first_name, :last_name, presence: true
+  validates :email, uniqueness: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
 
- def self.create_with_auth_and_hash(authentication, auth_hash)
+  def self.create_with_auth_and_hash(authentication, auth_hash)
 
-   user = self.create!(
+    user = self.create!(
      first_name: auth_hash["info"]["first_name"],
      last_name: auth_hash["info"]["last_name"],
      email: auth_hash["info"]["email"],
@@ -28,9 +28,7 @@ class User < ApplicationRecord
 
 
  def name
-    first_name + " " + last_name 
+    first_name + " " + last_name
   end
 
  end
-
- 
