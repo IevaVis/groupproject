@@ -6,7 +6,6 @@ class UsersController < Clearance::UsersController
 
 	def create
 		@user = User.new(allowed_params)
-		# @user.role = params[:user][:role].to_i
 		if @user.save
 			sign_in @user
 			redirect_to user_path(@user)
@@ -42,7 +41,7 @@ class UsersController < Clearance::UsersController
 	private
 
 	def allowed_params
-		params.require(:user).permit(:first_name, :last_name, :email, :password, :about_me, :role)
+		params.require(:user).permit(:first_name, :last_name, :email, :password, :about_me, :role, :avatar)
 	end
 
 
