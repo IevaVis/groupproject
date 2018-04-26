@@ -8,6 +8,9 @@
       <% x, y = row*3, (row*3)+2 %>
       <% @articles[x..y].each do |article| %>
         <div id="article-outline" class="col-md-4">
+          <div id="site-name">
+            <a href="<%= article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></span></a>
+          </div>
           <div id="article-heading-outline">
             <h6 class="article-heading"><%= article.title %></h6>
           </div>
@@ -20,10 +23,16 @@
             <% article.tags.each do |tag| %>
               <span class="article-tag badge badge-primary"><%= tag %></span>
             <% end %>
+
+            <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
+            <% if article_owner?(article) %>
+              <% form_for article, url: articles_path, method: "get" do |form| %>
+              <% end %>
+            <% end %>
           </div>
-          <div><%= link_to 'Show', article %></div>
-          <div><%= link_to 'Edit', edit_article_path(article) %></div>
-          <div><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+          <span><%= link_to 'Show', article %></span> |
+          <span><%= link_to 'Edit', edit_article_path(article) if article_owner?(article) %></span> |
+          <span><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
         </div>
       <% end %>
     <% end -%>
@@ -47,8 +56,6 @@
   }
 
   #article-outline {
-    /* position: relative;
-    width: 30vw; */
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
