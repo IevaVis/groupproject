@@ -4,20 +4,22 @@
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">        
 
         <!-- How it works come in here -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active" >
               <!-- sign_in path will be a placeholder for how it works -->
               <%= link_to t("How it Works"), sign_in_path, class: 'nav-link'  %>
+
             </li>
               
               <% if signed_in? -%>
