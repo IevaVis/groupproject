@@ -4,7 +4,7 @@
 	<div class="user-info">
 
 		<% if @user.avatar.present? %>
-			<%= image_tag @user.avatar, :class => "user-profile-image" %>
+			<%= image_tag @user.avatar.url, :class => "user-profile-image" %>
 		<% else %>
 			<img src="/assets/defaultpicture.png", class="user-profile-image">
 		<% end %>
