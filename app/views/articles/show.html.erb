@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <div id="article">
+  <div id="site-name">
+    <a href="<%= @article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(@article.link).host.downcase}" %></span></a>
+  </div>
   <div id="article-heading-outline">
     <h3 id="article-heading"><%= @article.title %></h3>
   </div>
