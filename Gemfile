@@ -14,12 +14,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'clearance'
+gem 'carrierwave', '~> 1.0'
 gem 'bootstrap', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -34,7 +34,7 @@ group :development do
 end
 
 group :test do
- 
+
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
