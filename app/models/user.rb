@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   include Clearance::User
-   	has_many :authentications, dependent: :destroy
     enum role: [:regular, :expert, :admin]
+   	has_many :authentications, dependent: :destroy
+    mount_uploader :avatar, AvatarUploader
   	validates :first_name, :last_name, presence: true
 	validates :email, uniqueness: true
 	validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
@@ -24,6 +25,11 @@ class User < ApplicationRecord
    x = self.authentications.find_by(provider: 'google_oauth2')
    return x.token unless x.nil?
  end
+
+
+ def name
+    first_name + " " + last_name 
+  end
 
  end
 

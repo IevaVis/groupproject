@@ -16,3 +16,10 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
+
+
+$(function(){
+	$('.file-upload').on('change', function(){
+		$('#file-upload-info').html(this.files[0].name);
+	})
+});
