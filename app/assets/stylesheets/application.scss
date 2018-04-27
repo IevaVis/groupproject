@@ -1,0 +1,20 @@
+@import "bootstrap";
+@import "forms";
+@import "users";
+
+.navbar{
+	margin-bottom: 0px ;
+}
+.main {
+	margin-top: 5%;
+}
+
+ .popover {
+        width: 300px !important;
+        top: 0px !important;
+    }
+
+    li.dropdown:last-child .dropdown-menu {
+  right: 0;
+  left: auto;
+}
