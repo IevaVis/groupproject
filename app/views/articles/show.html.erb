@@ -36,9 +36,9 @@
           <%= simple_format post.text %>
         </div>
         <div class="post-comments-badge-outline">
-          <%- # if !post.comments.blank? -%>
+          <% if !post.comments.blank? %>
             <span id="<%= "view-comments-badge-#{post.id}" %>" class="view-comments-badge badge badge-secondary"><%= "View Comments (#{post.comments.length})" %></span>
-          <%- #end -%>
+          <% end %>
           <span id="<%= "post-respond-badge-#{post.id}" %>" class="post-respond-badge badge badge-secondary">Add Comment</span>
         </div>
         <% if signed_in? && current_user.expert? %>

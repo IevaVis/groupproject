@@ -5,5 +5,13 @@
   $(".comment-form-outline").hide();
   <% selector = "#view-comments-badge-#{comment.post_id}" %>
   <% num_comments = "View Comments (#{Post.find(comment.post_id).comments.length.to_s})" %>
-  $("<%=j selector %>").text("<%=j num_comments %>");
+  if($("<%=j selector %>").length == false) {
+    <% new_badge = content_tag :span, num_comments, id: selector, class: ["view-comments-badge", "badge", "badge-secondary"] %>
+    <% p new_badge %>
+    <% selector_sibling = "#post-respond-badge-#{comment.post_id}" %>
+    $("<%=j selector_sibling %>").parent().prepend("<%=j new_badge %>");
+  }
+  else {
+    $("<%=j selector %>").text("<%=j num_comments %>");
+  }
 <% end %>
