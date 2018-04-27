@@ -12,7 +12,12 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">        
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">   
+
+          <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+               <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+                 <%= submit_tag "Search", :name => nil %>
+            <% end %>     
 
         <!-- How it works come in here -->
         <ul class="navbar-nav ml-auto">
@@ -28,6 +33,20 @@
 
                     <%= link_to t(".sign_out"), session_path, method: :delete , class: 'nav-link'  %>
                   </li>
+
+                  <% if current_user.avatar.present? %>
+                     <a href="/users/<%= current_user.id %>">
+                    <%= image_tag current_user.avatar.thumb.url, :class => "round-image" %>  
+                     </a>
+
+                  <% else %>
+                  <a href="/users/<%= current_user.id %>">
+                  <img src="/assets/defaultpicture.png", class="round-image">
+                </a>
+
+                  <% end %>
+
+    
                 </ul>
               <% else %>
                   <!-- Member Link -->
@@ -63,18 +82,13 @@
           </form>
            -->
           <!-- needs model and controller to -->
-
-          <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-               <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
-                 <%= submit_tag "Search", :name => nil %>
-            <% end %>
          
 
           <!-- form ends here -->
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container">
       <div id="flash">
         <% flash.each do |key, value| -%>
           <div id="flash_<%= key %>"><%=h value %></div>
