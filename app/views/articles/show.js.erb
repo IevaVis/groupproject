@@ -1,3 +1,9 @@
-alert("worked!");
-$("#article-posts").append("<%=j render partial: 'articles/new_post', locals: {post: post} %>");
-$("#post-form-text").attr("placeholder", "Suggest literature, documentaries, other articles, etc...").val("");
+<% if comment.nil? %>
+  $("#article-posts").append("<%=j render partial: 'articles/new_post', locals: {post: post} %>");
+  $("#post-form-text").attr("placeholder", "Suggest literature, documentaries, other articles, etc...").val("");
+<% else %>
+  $(".comment-form-outline").hide();
+  <% selector = "#view-comments-badge-#{comment.post_id}" %>
+  <% num_comments = "View Comments (#{Post.find(comment.post_id).comments.length.to_s})" %>
+  $("<%=j selector %>").text("<%=j num_comments %>");
+<% end %>

@@ -1,73 +1,72 @@
 <p id="notice"><%= notice %></p>
 
-<div id="board">
-  <div id="article">
-    <div id="site-name">
-      <a href="<%= @article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(@article.link).host.downcase}" %></span></a>
-    </div>
-    <div id="article-heading-outline">
-      <h3 id="article-heading"><%= @article.title %></h3>
-    </div>
-    <div id="article-image-outline">
-      <div>
-        <% if !@article.image.nil? %>
-          <%= image_tag @article.image, id: "article-image", class: "img-fluid rounded", height: "300", width: "400" %>
-        <% end %>
-      </div>
-    </div>
-    <div id="tags">
-      <% @article.tags.each do |tag| %>
-        <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
+<div id="article">
+  <div id="site-name">
+    <a href="<%= @article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(@article.link).host.downcase}" %></span></a>
+  </div>
+  <div id="article-heading-outline">
+    <h3 id="article-heading"><%= @article.title %></h3>
+  </div>
+  <div id="article-image-outline">
+    <div>
+      <% if !@article.image.nil? %>
+        <%= image_tag @article.image, id: "article-image", class: "img-fluid rounded", height: "300", width: "400" %>
       <% end %>
     </div>
-    <br>
-    <div id="article-posts">
-      <% @article.posts.each do |post| %>
-        <div class="post-outline container hoverable">
-          <div class="post-details row">
-            <span class="col-md-4">
-              <span><%= image_tag User.find(post.user_id).avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless User.find(post.user_id).avatar.url.nil? %></span>
-              <span><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
-            </span>
-            <span class="col-md-4"><%= post.id %></span>
-            <span class="col-md-4"><%= post.created_at %></span>
-          </div>
-          <br>
-          <div class="post-text">
-            <%= simple_format post.text %>
-          </div>
-          <div class="post-comments-badge-outline">
-            <% if post.comments.blank? %>
-              <span id="<%= "view-comments-badge-#{post.id}" %>" class="view-comments-badge badge badge-secondary">View Comments</span>
-            <% end %>
-            <span class="post-respond-badge badge badge-secondary">Add Comment</span>
-          </div>
-          <% if signed_in? && current_user.expert? %>
-            <div id="<%= "comment-form-#{post.id}" %>" class="comment-form-outline">
-              <%= form_for Comment.new, url: comments_path, remote: true do |form| %>
-                <%= form.label :text, "New Comment" %>
-                <%= form.text_area :text, type: 'text', rows: 4, id: "comment-form-text", :class => "form-control", required: true, placeholder: "Follow up on this post..." %>
-                <%= form.hidden_field :user_id, value: current_user.id %>
-                <%= form.hidden_field :article_id, value: @article.id %>
-                <%= form.hidden_field :post_id, value: post.id %>
-              <% end %>
-            </div>
-          <% end %>
+  </div>
+  <div id="tags">
+    <% @article.tags.each do |tag| %>
+      <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
+    <% end %>
+  </div>
+  <br>
+  <div id="article-posts">
+    <% @article.posts.each do |post| %>
+      <div class="post-outline container hoverable">
+        <div class="post-details row">
+          <span class="col-md-4">
+            <span><%= image_tag User.find(post.user_id).avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless User.find(post.user_id).avatar.url.nil? %></span>
+            <span><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
+          </span>
+          <span class="col-md-4"><%= post.id %></span>
+          <span class="col-md-4"><%= post.created_at %></span>
         </div>
         <br>
-      <% end %>
-    </div>
-    <div id="post-form-outline">
-      <% if signed_in? && current_user.expert? %>
-        <%= form_for Post.new, url: posts_path, remote: true do |form| %>
-          <%= form.label :text, "New Comment" %>
-          <%= form.text_area :text, type: 'text', rows: 4, id: "post-form-text", :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
-          <%= form.hidden_field :user_id, value: current_user.id %>
-          <%= form.hidden_field :article_id, value: @article.id %>
-          <%= form.submit "Post" %>
+        <div class="post-text">
+          <%= simple_format post.text %>
+        </div>
+        <div class="post-comments-badge-outline">
+          <%- # if !post.comments.blank? -%>
+            <span id="<%= "view-comments-badge-#{post.id}" %>" class="view-comments-badge badge badge-secondary"><%= "View Comments (#{post.comments.length})" %></span>
+          <%- #end -%>
+          <span id="<%= "post-respond-badge-#{post.id}" %>" class="post-respond-badge badge badge-secondary">Add Comment</span>
+        </div>
+        <% if signed_in? && current_user.expert? %>
+          <div id="<%= "comment-form-#{post.id}" %>" class="comment-form-outline">
+            <%= form_for Comment.new, url: comments_path, remote: true do |form| %>
+              <%= form.label :text, "New Comment" %>
+              <%= form.text_area :text, type: 'text', rows: 4, id: "comment-form-text", :class => "form-control", required: true, placeholder: "Follow up on this post..." %>
+              <%= form.hidden_field :user_id, value: current_user.id %>
+              <%= form.hidden_field :article_id, value: @article.id %>
+              <%= form.hidden_field :post_id, value: post.id %>
+              <%= form.submit "Post", class: "btn btn-outline-secondary btn-sm" %>
+            <% end %>
+          </div>
         <% end %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+  <div id="post-form-outline">
+    <% if signed_in? && current_user.expert? %>
+      <%= form_for Post.new, url: posts_path, remote: true do |form| %>
+        <%= form.label :text, "New Comment" %>
+        <%= form.text_area :text, type: 'text', rows: 4, id: "post-form-text", :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: @article.id %>
+        <%= form.submit "Post", class: "btn btn-outline-secondary btn-sm" %>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
 
@@ -79,11 +78,14 @@
   $(document).ready(function() {
     $(".comment-form-outline").hide();
 
-    $(".view-comments-badge").on("click", (event) => {
+    $(".container").addClass("container-fluid").removeClass("container");
+
+    $(".post-respond-badge").on("click", (event) => {
       event.preventDefault();
 
       let postID = event.target.id.split("-")[3];
-      alert(postID);
+      $(`#comment-form-${postID}`).toggle();
+      $(`.comment-form-outline:not(#comment-form-${postID})`).hide();
     })
   })
 
@@ -93,12 +95,25 @@
 
   .container {
     margin: 0px;
+    margin-right: 0px;
   }
 
   .post-outline {
     padding: 8px;
     position: relative;
     background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(150, 150, 150, .2);
+    border-radius: 4px;
+  }
+
+  .comment-form-outline {
+    position: absolute;
+    left: 800px;
+    top: 0px;
+    width: 400px;
+    background-color: rgba(150, 150, 150, .1);
     border-style: solid;
     border-width: 2px;
     border-color: rgba(150, 150, 150, .2);
