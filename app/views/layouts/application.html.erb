@@ -90,8 +90,8 @@
 
     <div class="container">
       <div id="flash">
-        <% flash.each do |key, value| -%>
-          <div id="flash_<%= key %>"><%=h value %></div>
+        <% flash.each do |key, value| %>
+        <div class="alert alert-primary" role="alert"><%=h value %></div>
         <% end %>
       </div>
 

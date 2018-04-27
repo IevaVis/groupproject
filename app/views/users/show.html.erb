@@ -22,21 +22,19 @@
 						<div><%=@user.name %></div>
 						<div><%=@user.title %></div>
 					</div>
-					
-				</div>
 
+					<div class="user-links">
+					<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary btn-sm" %>
+					<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary btn-sm" %>
+					<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary btn-sm" %>
+					</div>
+				</div>
 			</div>
 
 			<div class="col-md-6">
 				<div class="about-me">
 					<h5>About me:</h5>
 					<%= @user.about_me %>
-				</div><br/>
-				<br/>
-				<div class="user-links">
-					<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary " %>
-					<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary" %>
-					<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary" %>
 				</div>
 			</div>
 		</div>
