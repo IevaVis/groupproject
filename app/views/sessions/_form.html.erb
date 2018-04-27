@@ -20,7 +20,7 @@
 
 
   <div class="google-button">
-    <%= link_to "/auth/google_oauth2", :class => "btn btn-outline-secondary btn-block" do %>
+    <%= link_to "/auth/google_oauth2?role=#{params[:role]}", :class => "btn btn-outline-secondary btn-block" do %>
       <i class="fab fa-google"></i> <%= "Sign in with Google" %>
     <% end %>
   </div><br/>

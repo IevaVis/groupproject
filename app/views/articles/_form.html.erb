@@ -12,10 +12,10 @@
   <% elsif signed_in? %>
 
     <%= form.label :link %>
-    <%= form.text_field :link, class: "form-control mr-sm-1 field" %>
+    <%= form.text_field :link, :class => "form-control new-article-form" %>
 
     <%= form.label :tags, "Tags (separate with comma)" %>
-    <%= form.text_field :tags, class: "form-control mr-sm-1 field" %>
+    <%= form.text_field :tags, :class => "form-control new-article-form" %>
 
     <%= form.hidden_field :image %>
     <%= form.hidden_field :title %>

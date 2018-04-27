@@ -1,18 +1,88 @@
 <p id="notice"><%= notice %></p>
 
-<h3 id="article-title"><%= @article.title %></h3>
-
-<div>
-  <% p @article, @article.image %>
-  <% if !@article.image.nil? %>
-    <%= image_tag @article.image, id: "article-image", height: "300", width: "400" %>
-  <% end %>
+<div id="article">
+  <div id="site-name">
+    <a href="<%= @article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(@article.link).host.downcase}" %></span></a>
+  </div>
+  <div id="article-heading-outline">
+    <h3 id="article-heading"><%= @article.title %></h3>
+  </div>
+  <div id="article-image-outline">
+    <div>
+      <% if !@article.image.nil? %>
+        <%= image_tag @article.image, id: "article-image", class: "img-fluid rounded", height: "300", width: "400" %>
+      <% end %>
+    </div>
+  </div>
+  <div id="tags">
+    <% @article.tags.each do |tag| %>
+      <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
+    <% end %>
+  </div>
+  <br>
+  <div id="article-posts">
+    <% @article.posts.each do |post| %>
+      <div class="post-outline container hoverable">
+        <div class="post-details row">
+          <span class="col-md-4"><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
+          <span class="col-md-4"><%= post.id %></span>
+          <span class="col-md-4"><%= post.created_at %></span>
+        </div>
+        <br>
+        <div class="post-text">
+          <%= post.text %>
+        </div>
+      </div>
+      <br>
+    <% end %>
+  </div>
+  <div id="post-form-outline">
+    <% if signed_in? && current_user.expert? %>
+      <%= form_for Post.new, url: posts_path, remote: true do |form| %>
+        <%= form.label :text, "New Comment" %>
+        <%= form.text_area :text, type: 'text', rows: 4, id: "post-form-text", :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: @article.id %>
+        <%= form.submit "Post" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-<% @article.tags.each do |tag| %>
-  <span><%= "#{tag}" %></span>
-<% end %>
 
-
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Edit', edit_article_path(@article) if signed_in? && current_user.id == @article.user_id %> |
 <%= link_to 'Back', articles_path %>
+
+<style>
+
+  .post-outline {
+    padding: 8px;
+    position: relative;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(150, 150, 150, .2);
+    border-radius: 4px;
+  }
+
+  .post-outline:hover {
+    background: -webkit-linear-gradient(#C7D3DC,#5B798E);
+    background: -moz-linear-gradient(#C7D3DC,#5B798E);
+    background: -o-linear-gradient(#C7D3DC,#5B798E);
+    background: linear-gradient(#C7D3DC,#5B798E);
+
+    -webkit-transition: background 1s ease-out;
+    -moz-transition: background 1s ease-out;
+    -o-transition: background 1s ease-out;
+    transition: background 1s ease-out;
+  }
+
+  #article {
+    background-color: rgba(150, 150, 150, .1);
+    position: relative;
+    left: 10vw;
+    width: 50vw;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+</style>

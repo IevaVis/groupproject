@@ -13,6 +13,7 @@
       <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">   
+
           <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
                <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
                  <%= submit_tag "Search", :name => nil %>
@@ -32,6 +33,7 @@
 
                     <%= link_to t(".sign_out"), session_path, method: :delete , class: 'nav-link'  %>
                   </li>
+
                    <% if current_user.avatar.present? %>
                     <a href="/users/<%= current_user.id %>">
          <%= image_tag current_user.avatar.thumb.url, :class => 'round-image' %>  
@@ -42,6 +44,7 @@
          <img src="/assets/defaultpicture.png", class='round-image'>
          
        <% end %>
+
                 </ul>
               <% else %>
                   <!-- Member Link -->
@@ -78,17 +81,16 @@
            -->
           <!-- needs model and controller to -->
 
-        
          
 
           <!-- form ends here -->
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container">
       <div id="flash">
-        <% flash.each do |key, value| -%>
-          <div id="flash_<%= key %>"><%=h value %></div>
+        <% flash.each do |key, value| %>
+        <div class="alert alert-primary" role="alert"><%=h value %></div>
         <% end %>
       </div>
 
