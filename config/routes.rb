@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :posts
   resources :articles
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
