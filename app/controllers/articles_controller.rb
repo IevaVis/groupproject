@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all
     if params[:search]
-      @articles = Article.search(params:search).order("created_at DESC")
+      @articles = Article.search(params[:search]).order("created_at DESC")
     else
       @articles = Article.all.order("created_at DESC")
     end
@@ -102,6 +102,7 @@ class ArticlesController < ApplicationController
         params[:article][:title] = contents[0]
         # params[:article][:image] = contents[1].split("/")[-1] #this way of getting the article's img might not work in some cases
         params[:article][:image] = contents[1]
+        p URI.parse(params[:article][:link]).host.downcase
 
         # File.open(contents[1])
         # file_upload

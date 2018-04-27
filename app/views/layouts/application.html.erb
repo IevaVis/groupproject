@@ -8,15 +8,17 @@
   </head>
 
   <body>
+    
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-      <div></div>
+  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">   
+
           <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
                <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
                  <%= submit_tag "Search", :name => nil %>
@@ -48,6 +50,7 @@
                       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                         <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
 
+
                         <% if current_user.avatar.present? %>
                         <a href="/users/<%= current_user.id %>">
                         <%= image_tag current_user.avatar.thumb.url, :class => 'round-image nav-link dropdown-toggle' %>
@@ -56,13 +59,15 @@
                         <img src="/assets/BradPitt.png", class='profile-image-sizing nav-link dropdown-toggle'>
                         <% end %>
 
+
                         <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
                         <span class="caret"></span>
                         </a>
                         
                         <!-- dropdown-menu --><!-- dropdown-menu -->
 
-                        <ul class="dropdown-menu">
+
+                        <ul class="dropdown-menu dropdown-menu-right">
                           
                           <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
                           <li>
@@ -76,6 +81,7 @@
                         <!-- dropdown-menu --><!-- dropdown-menu -->
                     </li>
                       
+
                 </ul>
             
         <!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial -->
@@ -128,7 +134,6 @@
            -->
           <!-- needs model and controller to -->
 
-        
          
 
           <!-- form ends here -->
@@ -136,10 +141,12 @@
 
     </nav>
 
+
     <div class="container-fluid main">
+
       <div id="flash">
-        <% flash.each do |key, value| -%>
-          <div id="flash_<%= key %>"><%=h value %></div>
+        <% flash.each do |key, value| %>
+        <div class="alert alert-primary" role="alert"><%=h value %></div>
         <% end %>
       </div>
 

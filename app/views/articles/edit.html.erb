@@ -1,6 +1,14 @@
 <h1>Editing Article</h1>
 
-<%= render 'form', article: @article %>
+<%= form_for @article, url: {action: "update"} do |form| %>
+  <%= form.label :tags, "Add/Change/Remove Tags (separate with a comma)" %>
+  <%= form.text_field :tags, value: @article.tags.join(","), class: "form-control new-article-form" %>
+  <%= form.hidden_field :link, value: @article.link %>
+  <%= form.hidden_field :image, value: @article.image %>
+  <%= form.hidden_field :title, value: @article.title %>
+  <%= form.hidden_field :is_active, value: @article.is_active %>
+  <%= form.hidden_field :user_id, value: @article.user_id %>
+<% end %>
 
 <%= link_to 'Show', @article %> |
 <%= link_to 'Back', articles_path %>
