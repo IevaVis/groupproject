@@ -4,6 +4,6 @@ class Article < ApplicationRecord
   validates :link, uniqueness: true
 
   def self.search(search)
-  	where("title LIKE ?",  "%#{search}%" )
+  	where("title ILIKE ?",  "%#{search}%" )
   end
 end

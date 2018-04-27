@@ -9,6 +9,7 @@ class User < ApplicationRecord
  def self.create_with_auth_and_hash(authentication, auth_hash, role)
   
    user = self.create!(
+
      first_name: auth_hash["info"]["first_name"],
      last_name: auth_hash["info"]["last_name"],
      email: auth_hash["info"]["email"],
@@ -26,9 +27,7 @@ class User < ApplicationRecord
 
 
  def name
-    first_name + " " + last_name 
+    first_name + " " + last_name
   end
 
  end
-
- 
