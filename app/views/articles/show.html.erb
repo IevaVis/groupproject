@@ -19,31 +19,32 @@
       <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
     <% end %>
   </div>
-  <%= tag("br") %>
-  <div id="post-form-outline">
-    <% if current_user.expert? %>
-      <%= form_for Post.new, url: posts_path do |form| %>
-        <%= form.label :text, "New Comment" %>
-        <%= form.text_area :text, type: 'text', rows: 4, :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.hidden_field :article_id, value: @article.id %>
-        <%= form.submit "Post" %>
-      <% end %>
-    <% end %>
-  </div>
+  <br>
   <div id="article-posts">
     <% @article.posts.each do |post| %>
-      <%= tag("br") %>
       <div class="post-outline container">
         <div class="post-details row">
           <span class="col-md-4"><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
           <span class="col-md-4"><%= post.id %></span>
           <span class="col-md-4"><%= post.created_at %></span>
         </div>
+        <br>
         <div class="post-text">
           <%= post.text %>
         </div>
       </div>
+      <br>
+    <% end %>
+  </div>
+  <div id="post-form-outline">
+    <% if signed_in? && current_user.expert? %>
+      <%= form_for Post.new, url: posts_path, remote: true do |form| %>
+        <%= form.label :text, "New Comment" %>
+        <%= form.text_area :text, type: 'text', rows: 4, id: "post-form-text", :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: @article.id %>
+        <%= form.submit "Post" %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -54,13 +55,16 @@
 <style>
 
   .post-outline {
+    padding: 8px;
     position: relative;
     background-color: white;
     border-style: solid;
-    border-width: 4px;
-    border-color: rgba(26, 63, 66, .6);
+    border-width: 2px;
+    border-color: rgba(150, 150, 150, .2);
     border-radius: 4px;
   }
+
+
 
   #article {
     background-color: rgba(150, 150, 150, .1);
