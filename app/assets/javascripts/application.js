@@ -18,7 +18,7 @@
 //= require_tree .
 
 
-$(function(){
+$(document).on('turbolinks:load', function() {
 	$('.file-upload').on('change', function(){
 		$('#file-upload-info').html(this.files[0].name);
 	})

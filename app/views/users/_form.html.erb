@@ -13,6 +13,11 @@
   <%= form.text_field :last_name, type: 'text', :class => "form-control", required: true, placeholder: "Smith" %>
 </div>
 
+<% if params[:role] == "expert" || current_user&.expert? %>
+<div class="form-group">
+  <%= form.label :title, class: 'required' %>
+  <%= form.text_field :title, type: 'text', :class => "form-control", required: true, placeholder: "Professor" %>
+<% end %>
 
 <div class="form-group">
   <%= form.label :email, class: 'required' %>
@@ -24,21 +29,18 @@
   <%= form.password_field :password, type: 'password', :class => "form-control", required: true, placeholder: "......" %>
 </div>
 
+
 <div class="form-group">
 	<%= form.label :about_me %>
   	<%= form.text_area :about_me, type: 'text', rows: 5, :class => "form-control", placeholder: "Share some information about yourself" %>
 </div>
 
 <div class="form-group">
-  <div class="upload-button">
-    <label class="btn btn-default btn-file">
+    <label class="btn-file">
       Upload profile picture!
       <%= form.file_field :avatar, class: 'd-none file-upload' %>
-
     </label>
     <span id="file-upload-info"></span>
-    <!-- label for="file">Upload profile picture!</label> -->
-  </div>
 </div>
 
 

@@ -1,29 +1,49 @@
 
+<div class="profile-header">
+<h3>Profile</h3>
+</div>
 
 <div class="jumbotron">
-	<div class="user-info">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="user-info">
+					<div class="avatar-container">
 
-		<% if @user.avatar.present? %>
-			<%= image_tag @user.avatar, :class => "user-profile-image" %>
-		<% else %>
-			<img src="/assets/defaultpicture.png", class="user-profile-image">
-		<% end %>
+						<% if @user.avatar.present? %>
+							<%= image_tag @user.avatar.url, :class => "user-profile-image" %>
+						<% else %>
+							<img src="/assets/defaultpicture.png", class="user-profile-image">
+						<% end %>
+						<br/><br/>
+					</div>
 	
+					<div class="user-profile-titles">
+						<div><%=@user.name %></div>
+						<div><%=@user.title %></div>
+					</div>
 
-	
-	<div class="user-name">
-		<div><%=@user.name %></div>
+					<div class="user-links">
+					<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary btn-sm" %>
+					<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary btn-sm" %>
+					<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary btn-sm" %>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="about-me">
+					<h5>About me:</h5>
+					<%= @user.about_me %>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="user-links">
-	<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary" %>	
-	<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary" %>
-	<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary" %>
-	</div>
-
-</div>
 </div>
 
-	<div>About me: <%= @user.about_me %></div><br/>
+
+
+
 
 
 

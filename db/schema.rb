@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(version: 2018_04_26_082707) do
     t.integer "role"
     t.string "first_name"
     t.string "last_name"
-    t.text "about_me", default: [], array: true
     t.string "avatar"
+    t.string "title"
+    t.text "about_me"
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end

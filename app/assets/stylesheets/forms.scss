@@ -38,28 +38,23 @@ label.required:after {
 	border-radius: 0px 0px 10px 10px;
 }
 
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
 
-.inputfile + label {
+.btn-file {
     font-size: 18px;
-    font-weight: 300;
-    color: grey;
+    font-weight: 400;
     display: inline-block;
-    border-radius: 2px;
+    cursor: pointer; 
    
 }
 
-
-.inputfile + label {
-	cursor: pointer; 
+.btn-file:hover {
+	color: grey;
 }
+
+
+
+
+
 
 
 

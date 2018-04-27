@@ -1,24 +1,49 @@
+
+
+
 .user-profile-image {
 	border: 2px solid #d9d9d9;
     height: 300px;
-    width: 300px;
+    width: 360px;
     border-radius: 2px;
 }
 
 .jumbotron {
-	margin-top: 100px;
+	margin-top: 20px;
+
 }
 
-.user-name {
-font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+.user-profile-titles {
 font-size: 18px;
-font-weight: 700;
+font-weight: 800;
 text-alignment: center;
 color: grey;
 margin-top: 5px;
-margin-bottom: 5px;
+margin-bottom: 20px;
 }
 
 .user-info {
 	text-align: center;
 }
+
+.round-image {
+	width: 100px;
+	height: 100px;
+}
+
+.about-me {
+line-height: 1.8;
+color: grey;
+font-weight: 400;
+
+}
+
+.profile-header {
+	text-align: center;
+	margin-top: 10px;
+}
+
+
+
+
+
