@@ -19,12 +19,62 @@
       <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
     <% end %>
   </div>
+  <br>
+  <div id="article-posts">
+    <% @article.posts.each do |post| %>
+      <div class="post-outline container hoverable">
+        <div class="post-details row">
+          <span class="col-md-4"><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
+          <span class="col-md-4"><%= post.id %></span>
+          <span class="col-md-4"><%= post.created_at %></span>
+        </div>
+        <br>
+        <div class="post-text">
+          <%= post.text %>
+        </div>
+      </div>
+      <br>
+    <% end %>
+  </div>
+  <div id="post-form-outline">
+    <% if signed_in? && current_user.expert? %>
+      <%= form_for Post.new, url: posts_path, remote: true do |form| %>
+        <%= form.label :text, "New Comment" %>
+        <%= form.text_area :text, type: 'text', rows: 4, id: "post-form-text", :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: @article.id %>
+        <%= form.submit "Post" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
 <%= link_to 'Edit', edit_article_path(@article) if signed_in? && current_user.id == @article.user_id %> |
 <%= link_to 'Back', articles_path %>
 
 <style>
+
+  .post-outline {
+    padding: 8px;
+    position: relative;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(150, 150, 150, .2);
+    border-radius: 4px;
+  }
+
+  .post-outline:hover {
+    background: -webkit-linear-gradient(#C7D3DC,#5B798E);
+    background: -moz-linear-gradient(#C7D3DC,#5B798E);
+    background: -o-linear-gradient(#C7D3DC,#5B798E);
+    background: linear-gradient(#C7D3DC,#5B798E);
+
+    -webkit-transition: background 1s ease-out;
+    -moz-transition: background 1s ease-out;
+    -o-transition: background 1s ease-out;
+    transition: background 1s ease-out;
+  }
 
   #article {
     background-color: rgba(150, 150, 150, .1);
