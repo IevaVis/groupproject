@@ -2,32 +2,18 @@
   $("#article-posts").append("<%=j render partial: 'articles/new_post', locals: {post: post} %>");
   $("#post-form-text").attr("placeholder", "Suggest literature, documentaries, other articles, etc...").val("");
   $(".comment-form-outline, .post-comments").hide();
-  $(".post-respond-badge").on("click", (event) => {
-    event.preventDefault();
-
-    let postID = event.target.id.split("-")[3];
-    $(`#comment-form-${postID}`).toggle();
-    $(`.toggled:not(#comment-form-${postID})`).hide();
-  });
-<% else %>
+<% elsif defined? comment %>
   $(".comment-form-outline").hide();
   <% selector = "#view-comments-badge-#{comment.post_id}" %>
-  <% num_comments = "View Comments (#{Post.find(comment.post_id).comments.length.to_s})" %>
-  if($("<%=j selector %>").length == false) {
-    <% new_badge = content_tag :span, num_comments, id: selector, class: ["view-comments-badge", "badge", "badge-secondary"] %>
+  alert("<%=j selector %>");
+  <% num_comments = Post.find(comment.post_id).comments.length %>
+  <% if num_comments <= 1 %>
+    alert("num_comments <= 1");
+    <% new_badge = content_tag :span, "View Comments (1)", id: selector[1..-1], class: ["view-comments-badge", "badge", "badge-secondary"] %>
     <% selector_sibling = "#post-respond-badge-#{comment.post_id}" %>
     $("<%=j selector_sibling %>").parent().prepend("<%=j new_badge %>");
-    $(".view-comments-badge").on("click", (event) => {
-      event.preventDefault();
-
-      let postID = event.target.id.split("-")[3];
-      $(`#post-${postID}-comments`).toggle();
-      $(`.toggled:not(#post-${postID}-comments)`).hide();
-    });
-  }
-  else {
-    $("<%=j selector %>").text("<%=j num_comments %>");
-  }
+  <% end %>
+  $("<%=j selector %>").text("<%=j 'View Comments (' + num_comments.to_s + ')' %>");
   <% post_selector = "#post-#{comment.post_id}-comments" %>
   $("<%=j post_selector %>").append("<%=j render partial: 'articles/new_comment', locals: {comment: comment} %>");
 <% end %>

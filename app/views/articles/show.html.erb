@@ -48,7 +48,7 @@
 
     $(".container").addClass("container-fluid").removeClass("container");
 
-    $(".post-respond-badge").on("click", (event) => {
+    $("#article-posts").on("click", ".post-respond-badge", (event) => {
       event.preventDefault();
 
       let postID = event.target.id.split("-")[3];
@@ -56,7 +56,7 @@
       $(`.toggled:not(#comment-form-${postID})`).hide();
     });
 
-    $(".view-comments-badge").on("click", (event) => {
+    $("#article-posts").on("click", ".view-comments-badge", (event) => {
       event.preventDefault();
 
       let postID = event.target.id.split("-")[3];
@@ -64,7 +64,7 @@
       $(`.toggled:not(#post-${postID}-comments)`).hide();
 
     });
-  })
+  });
 
 </script>
 
@@ -75,7 +75,7 @@
     margin-right: 0px;
   }
 
-  .post-outline {
+  .post-outline, .comment-outline {
     padding: 8px;
     position: relative;
     background-color: white;
@@ -95,6 +95,11 @@
     border-width: 2px;
     border-color: rgba(150, 150, 150, .2);
     border-radius: 4px;
+  }
+
+  .post-comments {
+    overflow: scroll;
+    max-height: 500px;
   }
 
 //  .post-outline:hover {
