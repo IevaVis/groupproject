@@ -21,9 +21,8 @@ label.required:after {
     
 }
 
-
 .login-form{
-	margin-top: 60px;
+	margin-top: 30px;
 	box-shadow: 0px 0px 10px 1px grey;
 	border-radius: 5px;
 	padding-bottom: 20px;
@@ -31,7 +30,7 @@ label.required:after {
 }
 
 .title{
-	background: cornflowerblue;
+	background-color: #D8D8D8;
 	padding: 10px;
 	text-align: center;
 	color:#fff;
@@ -50,6 +49,73 @@ label.required:after {
 .btn-file:hover {
 	color: grey;
 }
+
+.post-articles-form {
+    
+    width: 600px;
+    margin-top:40px;
+    height: 400px;
+    box-shadow: 0px 0px 10px 1px grey;
+    border-radius: 5px;
+
+}
+
+.post-new-article {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700px;
+    font-style: italic;
+}
+
+a {
+    color: grey;
+}
+
+.articles-submit-button {
+    text-align: center;
+}
+
+.form-article-outline {
+  box-shadow: 0px 0px 10px 1px grey;
+    border-radius: 5px;
+    margin-top: 40px;
+}
+
+.form-all-tags {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-article-heading {
+    font-family: georgia,serif;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.75rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.form-article-link {
+    text-align: center;
+    font-size: 14px;
+    line-height: 11px;
+    line-height: 0.6875rem;
+    font-weight: 400;
+    font-style: normal;
+    font-family: georgia,serif;
+    color: #4d4d4d;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.labas {
+    backround-color: pink;
+}
+
+
 
 
 
