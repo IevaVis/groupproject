@@ -1,12 +1,13 @@
 @import "bootstrap";
 @import "forms";
 @import "users";
-@import "articles"
+@import "articles";
 
 
 .navbar{
 	margin-bottom: 0px ;
 }
+
 .main {
 	margin-top: 5%;
 }
@@ -21,3 +22,7 @@
   left: auto;
 }*/
 
+
+.post-new-article {
+	margin-top: 20px;
+}
