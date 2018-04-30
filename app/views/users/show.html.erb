@@ -1,6 +1,7 @@
 
-<div class="profile-header">
-<h3>Profile</h3>
+
+<div class="user-post-new-article">
+<%= link_to 'New Article', new_article_path, :class => "btn btn-danger" %>
 </div>
 
 <div class="jumbotron">
@@ -12,8 +13,10 @@
 					<div class="avatar-container">
 
 						<% if @user.avatar.present? %>
+						<a href="<%= edit_user_path %>">
 							<%= image_tag @user.avatar.url, :class => "user-profile-image" %>
 						<% else %>
+						<a href="<%= edit_user_path %>">
 							<img src="/assets/defaultpicture.png", class="user-profile-image">
 						<% end %>
 						<br/><br/>
@@ -26,9 +29,13 @@
 					</div>
 
 					<div class="user-links">
+            <% if @user == current_user %>
 					<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary btn-sm" %>
+          <% end %>
 					<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary btn-sm" %>
+					<% if @user.expert? %>
 					<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary btn-sm" %>
+					<% end %>
 					</div>
 				</div>
 			</div>
@@ -43,6 +50,73 @@
 	</div>
 </div>
 
+
+<p id="notice"><%= notice %></p>
+<div id="articles" class="container-fluid">
+  <% (0..(@user_articles.length/3)).each do |row| %>
+    <%= content_tag :div, class: "row" do -%>
+      <% x, y = row*3, (row*3)+2 %>
+      <% @user_articles[x..y].each do |article| %>
+        <div id="article-outline" class="col-md-4">
+          <div id="site-name">
+            <a href="<%= article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></span></a>
+          </div>
+          <div id="article-heading-outline">
+            <h6 class="article-heading"><%= article.title %></h6>
+          </div>
+          <div id="article-image-outline">
+            <% if !article.image.blank? %>
+              <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block", height: "200px", width: "300px" %></a>
+            <% end %>
+          </div>
+          <div id="article-tags-outline">
+            <% article.tags.each do |tag| %>
+              <span class="article-tag badge badge-primary"><%= tag %></span>
+            <% end %>
+
+            <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
+            <% if article_owner?(article) %>
+              <% form_for article, url: articles_path, method: "get" do |form| %>
+              <% end %>
+            <% end %>
+          </div>
+          <span><%= link_to 'Show', article %></span> |
+          <% if article_owner?(article) %>
+          <span><%= link_to 'Edit', edit_article_path(article) %></span> |
+          <span><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }%></span>
+          <% end %>
+        </div>
+      <% end %>
+    <% end -%>
+  <% end %>
+</div>
+
+
+
+<style>
+
+  .article-heading {
+    text-align: center;
+    border-bottom-style: dotted;
+    border-bottom-color: rgba(150, 150, 150, 1);
+  }
+
+  .article-image {
+    position: relative;
+  }
+
+  #article-outline {
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(150, 150, 150, .6);
+  }
+
+  #article-heading-outline {
+    margin-top: 6px;
+  }
+
+</style>
 
 
 

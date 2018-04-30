@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include Clearance::User
     enum role: [:regular, :expert, :admin]
+    has_many :articles
    	has_many :authentications, dependent: :destroy
     mount_uploader :avatar, AvatarUploader
   	validates :first_name, :last_name, presence: true

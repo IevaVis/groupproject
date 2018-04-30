@@ -1,4 +1,5 @@
 
+
 <div class="container">
 
   <div class="row">
@@ -7,7 +8,7 @@
 
       <div class="login-form col-md-6">
 
-        <h1 class="title">Sign Up Here</h1>
+        <h2 class="title"><strong>Sign Up Here</strong></h2>
 
           <%= form_for @user do |form| %>
 
@@ -15,7 +16,7 @@
 
                <div class="other-links">
 
-                <%= link_to "/auth/google_oauth2?role=#{params[:role]}", :class => "btn btn-outline-secondary btn-block" do %>
+                <%= link_to "/auth/google_oauth2?role=#{params[:role]}", :class => "btn btn-danger btn-block" do %>
                  <i class="fab fa-google"></i> <%= "Sign up with Google" %>
                   <% end %>
 

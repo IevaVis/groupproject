@@ -32,8 +32,7 @@ class SessionsController < Clearance::SessionsController
         redirect_back_or url_after_create
       else
         sign_out
-        flash[:notice] = "Please sign in with correct account!"
-        render template: "sessions/new", status: :unauthorized
+        redirect_to sign_in_path(role: @role), alert: "Please sign in with correct account!"
       end
     end
   end
