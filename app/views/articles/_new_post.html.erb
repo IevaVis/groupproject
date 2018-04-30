@@ -1,12 +1,40 @@
 <div class="post-outline container">
   <div class="post-details row">
-    <span class="col-md-4"><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
+    <span class="col-md-4">
+      <span><%= image_tag User.find(post.user_id).avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless User.find(post.user_id).avatar.url.nil? %></span>
+      <span><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
+    </span>
     <span class="col-md-4"><%= post.id %></span>
     <span class="col-md-4"><%= post.created_at %></span>
   </div>
   <br>
   <div class="post-text">
-    <%= post.text %>
+    <%= simple_format post.text %>
   </div>
+  <div class="post-comments-badge-outline">
+    <% if !post.comments.blank? %>
+      <span id="<%= "view-comments-badge-#{post.id}" %>" class="view-comments-badge badge badge-secondary"><%= "View Comments (#{post.comments.length})" %></span>
+    <% end %>
+    <span id="<%= "post-respond-badge-#{post.id}" %>" class="post-respond-badge badge badge-secondary">Add Comment</span>
+  </div>
+  <% # if !post.comments.blank? %>
+    <div id="<%= "post-#{post.id}-comments" %>" class="post-comments toggled">
+    <% post.comments.each do |comment| %>
+      <%= render partial: "articles/new_comment", locals: {comment: comment} %>
+    <% end %>
+    </div>
+  <% # end %>
+  <% if signed_in? && current_user.expert? %>
+    <div id="<%= "comment-form-#{post.id}" %>" class="comment-form-outline toggled">
+      <%= form_for Comment.new, url: comments_path, remote: true do |form| %>
+        <%= form.label :text, "New Comment" %>
+        <%= form.text_area :text, type: 'text', rows: 4, :class => "form-control", required: true, placeholder: "Follow up on this post..." %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: post.article_id %>
+        <%= form.hidden_field :post_id, value: post.id %>
+        <%= form.submit "Post", class: "btn btn-outline-secondary btn-sm" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 <br>
