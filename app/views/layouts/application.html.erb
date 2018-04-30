@@ -126,7 +126,7 @@
 
   <div class="post-new-article">
     <div data-toggle="modal", data-target="#addarticleModal", class="btn btn-danger">New Article</div>
-      <%= render 'articles/form', article: @article %>
+      <%= render 'articles/form', article: Article.new %>
   </div>
 
 <% else %>
