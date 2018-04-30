@@ -1,4 +1,4 @@
-<% if comment.nil? %>
+<% if defined? post %>
   $("#article-posts").append("<%=j render partial: 'articles/new_post', locals: {post: post} %>");
   $("#post-form-text").attr("placeholder", "Suggest literature, documentaries, other articles, etc...").val("");
 <% else %>
