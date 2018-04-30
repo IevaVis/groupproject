@@ -1,0 +1,16 @@
+<div id="<%= "comment-#{comment.id}-outline" %>" class="comment-outline container">
+  <div class="comment-details row">
+    <% comment_user = User.find(comment.user_id) %>
+    <span class="col-md-4">
+      <span><%= image_tag comment_user.avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless comment_user.avatar.url.nil? %></span>
+      <span><%= "#{comment_user.first_name} #{comment_user.last_name}" %></span>
+    </span>
+    <span class="col-md-4"><%= comment.id %></span>
+    <span class="col-md-4"><%= comment.created_at %></span>
+  </div>
+  <br>
+  <div class="comment-text">
+    <%= simple_format comment.text %>
+  </div>
+</div>
+<br>
