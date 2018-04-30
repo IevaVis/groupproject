@@ -41,8 +41,29 @@
           <% end %>
           <span id="<%= "post-respond-badge-#{post.id}" %>" class="post-respond-badge badge badge-secondary">Add Comment</span>
         </div>
+        <% if !post.comments.blank? %>
+          <div id="<%= "post-#{post.id}-comments" %>" class="post-comments toggled">
+          <% post.comments.each do |comment| %>
+            <div id="<%= "comment-#{comment.id}-outline" %>" class="comment-outline container">
+              <div class="comment-details row">
+                <% comment_user = User.find(comment.user_id) %>
+                <span class="col-md-4">
+                  <span><%= image_tag comment_user.avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless comment_user.avatar.url.nil? %></span>
+                  <span><%= "#{comment_user.first_name} #{comment_user.last_name}" %></span>
+                </span>
+                <span class="col-md-4"><%= comment.id %></span>
+                <span class="col-md-4"><%= comment.created_at %></span>
+              </div>
+              <br>
+              <div class="comment-text">
+                <%= simple_format comment.text %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        <% end %>
         <% if signed_in? && current_user.expert? %>
-          <div id="<%= "comment-form-#{post.id}" %>" class="comment-form-outline">
+          <div id="<%= "comment-form-#{post.id}" %>" class="comment-form-outline toggled">
             <%= form_for Comment.new, url: comments_path, remote: true do |form| %>
               <%= form.label :text, "New Comment" %>
               <%= form.text_area :text, type: 'text', rows: 4, id: "comment-form-text", :class => "form-control", required: true, placeholder: "Follow up on this post..." %>
@@ -76,7 +97,7 @@
 <script>
 
   $(document).ready(function() {
-    $(".comment-form-outline").hide();
+    $(".comment-form-outline, .post-comments").hide();
 
     $(".container").addClass("container-fluid").removeClass("container");
 
@@ -85,8 +106,17 @@
 
       let postID = event.target.id.split("-")[3];
       $(`#comment-form-${postID}`).toggle();
-      $(`.comment-form-outline:not(#comment-form-${postID})`).hide();
-    })
+      $(`.toggled:not(#comment-form-${postID})`).hide();
+    });
+
+    $(".view-comments-badge").on("click", (event) => {
+      event.preventDefault();
+
+      let postID = event.target.id.split("-")[3];
+      $(`#post-${postID}-comments`).toggle();
+      $(`.toggled:not(#post-${postID}-comments)`).hide();
+
+    });
   })
 
 </script>
@@ -108,7 +138,7 @@
     border-radius: 4px;
   }
 
-  .comment-form-outline {
+  .comment-form-outline, .post-comments {
     position: absolute;
     left: 800px;
     top: 0px;
