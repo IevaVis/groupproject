@@ -1,4 +1,6 @@
 
+/*css for signin, signup*/
+
 @-webkit-keyframes autofill {
     to {
         color: #666;
@@ -50,37 +52,38 @@ label.required:after {
 	color: grey;
 }
 
-.post-articles-form {
-    
-    width: 600px;
-    margin-top:40px;
-    height: 400px;
-    box-shadow: 0px 0px 10px 1px grey;
-    border-radius: 5px;
-
-}
-
-.post-new-article {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 700px;
-    font-style: italic;
-}
 
 a {
     color: grey;
+}
+
+/*css for post new article form*/
+
+.modal-content {
+    margin-top: 100px;
+    margin-left: -80px;
+    width: 550px;
+}
+
+.modal-title {
+    text-align: left;
 }
 
 .articles-submit-button {
     text-align: center;
 }
 
-.form-article-outline {
-  box-shadow: 0px 0px 10px 1px grey;
-    border-radius: 5px;
-    margin-top: 40px;
+.explain-links, .explain-tags {
+    color: grey !important;
+    font-size: 12px;
+    font-family: georgia,serif;
+    cursor: pointer;
+
 }
+
+
+/*css for article show page*/
+
 
 .form-all-tags {
     text-align: center;
@@ -111,9 +114,7 @@ a {
     cursor: pointer;
 }
 
-.labas {
-    backround-color: pink;
-}
+
 
 
 
