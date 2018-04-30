@@ -15,6 +15,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
+
       <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">   
@@ -25,10 +26,6 @@
             <% end %>   
       <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->  
 
-
-
-
-
         
         <ul class="navbar-nav ml-auto">
                 <!-- How it works -->
@@ -37,8 +34,6 @@
                 </li>
                 <!-- How it works -->
 
-               
-          
               <!-- If Logged in/signed in In -->
               
               <% if signed_in? -%>
@@ -58,7 +53,6 @@
                         <% else %>
                         <img src="/assets/BradPitt.png", class='profile-image-sizing nav-link dropdown-toggle'>
                         <% end %>
-
 
                         <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
                         <span class="caret"></span>
@@ -80,8 +74,6 @@
                         </ul>
                         <!-- dropdown-menu --><!-- dropdown-menu -->
                     </li>
-                      
-
                 </ul>
             
         <!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial -->
@@ -99,7 +91,7 @@
               <% else %>
               
                   <!-- Member Link -->
-               
+
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Member
@@ -119,7 +111,7 @@
                       <%= link_to t(".sign_up"), sign_up_path(role: "expert"), class: 'dropdown-item' %>
                     </div>
                   </li>
-                
+
               <% end %>
                 
                 
@@ -133,8 +125,6 @@
           </form>
            -->
           <!-- needs model and controller to -->
-
-         
 
           <!-- form ends here -->
       </div>
