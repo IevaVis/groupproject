@@ -8,47 +8,88 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">   
 
           <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
                <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
                  <%= submit_tag "Search", :name => nil %>
-            <% end %>
+            <% end %>   
+      <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->  
 
-        <!-- How it works come in here -->
+        
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active" >
-              <!-- sign_in path will be a placeholder for how it works -->
-              <%= link_to t("How it Works"), sign_in_path, class: 'nav-link'  %>
+                <!-- How it works -->
+                <li class="nav-item active" >
+                  <%= link_to t("How it Works"), how_it_works_path, class: 'nav-link'  %>
+                </li>
+                <!-- How it works -->
 
-            </li>
-
+              <!-- If Logged in/signed in In -->
+              
               <% if signed_in? -%>
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item active" >
-
-                    <%= link_to t(".sign_out"), session_path, method: :delete , class: 'nav-link'  %>
-                  </li>
-
-                  <% if current_user.avatar.present? %>
-                     <a href="/users/<%= current_user.id %>">
-                    <%= image_tag current_user.avatar.thumb.url, :class => "round-image" %>
-                     </a>
-
-                  <% else %>
-                  <a href="/users/<%= current_user.id %>">
-                  <img src="/assets/defaultpicture.png", class="round-image">
-                </a>
-
-                  <% end %>
+              <!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial -->
+              
+              <ul class="nav navbar-nav">
+      
+                    <li class="dropdown ">
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
 
 
+                        <% if current_user.avatar.present? %>
+                        <a href="/users/<%= current_user.id %>">
+                        <%= image_tag current_user.avatar.thumb.url, :class => 'round-image nav-link dropdown-toggle' %>
+                        </a>
+                        <% else %>
+                        <img src="/assets/BradPitt.png", class='profile-image-sizing nav-link dropdown-toggle'>
+                        <% end %>
+
+                        <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
+                        <span class="caret"></span>
+                        </a>
+                        
+                        <!-- dropdown-menu --><!-- dropdown-menu -->
+
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          
+                          <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
+                          <li>
+                            <!-- Sign Out button -->
+                              <% if signed_in? -%>
+                              <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
+                              <% end %>
+                            <!-- Sign Out button -->
+                          </li>
+                        </ul>
+                        <!-- dropdown-menu --><!-- dropdown-menu -->
+                    </li>
                 </ul>
+            
+        <!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial -->
+               
+
+
+
+                    
+                    
+                              
+              
+              <!-- if not signed in/logged in -->
+              <!-- if not signed in/logged in -->
+              <!-- if not signed in/logged in -->
               <% else %>
+              
                   <!-- Member Link -->
 
                   <li class="nav-item dropdown">
@@ -72,7 +113,9 @@
                   </li>
 
               <% end %>
-
+                
+                
+            
         </ul>
 
           <!-- Search Form for articles -->
@@ -83,19 +126,23 @@
            -->
           <!-- needs model and controller to -->
 
-
           <!-- form ends here -->
       </div>
+
     </nav>
 
-    <div class="container">
+
+    <div class="container-fluid main">
+
       <div id="flash">
         <% flash.each do |key, value| %>
-        <div class="alert alert-primary" role="alert"><%=h value %></div>
+        <div class="alert alert-danger" role="alert"><%=h value %></div>
         <% end %>
       </div>
 
       <%= yield %>
     </div>
+
+
   </body>
 </html>

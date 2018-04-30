@@ -23,3 +23,7 @@ $(document).on('turbolinks:load', function() {
 		$('#file-upload-info').html(this.files[0].name);
 	})
 });
+
+$(document).on('turbolinks:load', function(){
+    $('[data-toggle="popover"]').popover();   
+});

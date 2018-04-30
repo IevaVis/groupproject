@@ -1,3 +1,5 @@
+
+
 <%= form_for @article, url: {action: "create"} do |form| %>
   <% if article.errors.any? %>
     <div id="error_explanation">
@@ -11,23 +13,37 @@
     </div>
   <% elsif signed_in? %>
 
-    <%= form.label :link %>
-    <%= form.text_field :link, :class => "form-control new-article-form" %>
+    <div class="form-group">
+      <%= form.label :link, "Add a Link:" %>
+      <%= form.text_field :link,  :class => "form-control new-article-form", placeholder: "e.g. https://example.com" %>
+       <a href="#" title="Add a Link!" data-toggle="popover" data-trigger="hover" data-content="Posting an article allows you to share what you think would be of interest to others. Copy and add the URL of the article into the Link field. Include the http:// section of the URL. Your post will automatically link to the original source. Here you would be able to see an image and short preview of the article. Add post and wait for experts' comments." class="btn btn-default">How links work?</a>
+    </div>
 
-    <%= form.label :tags, "Tags (separate with comma)" %>
-    <%= form.text_field :tags, :class => "form-control new-article-form" %>
 
-    <%= form.hidden_field :image %>
-    <%= form.hidden_field :title %>
-    <%= form.hidden_field :is_active, :value => false %>
-    <%= form.hidden_field :user_id, :value => current_user.id %>
+    <div class="form-group">
+      <%= form.label :tags, "Create Tags:" %>
+      <%= form.text_field :tags, :class => "form-control new-article-form", placeholder: "e.g. Democracy, diplomacy, immigration" %>
+      <a href="#" title="Add tags!" data-toggle="popover" data-trigger="hover" data-content="Tags are keywords you assign to the article you are sharing. As a rule of thumb, keep your tags to two words or less. If you find yourself going over that limit, it may make more sense to create two separate tags—for example, rather than tagging something as 'Q1 expense report', you could tag it as 'Q1' and 'expense report'." class="btn btn-default">How tags work?</a>
+    </div>
+
+    <div class="form-group">
+      <%= form.hidden_field :image %>
+      <%= form.hidden_field :title %>
+      <%= form.hidden_field :is_active, :value => false %>
+      <%= form.hidden_field :user_id, :value => current_user.id %>
+    </div>
 
   <% end %>
 
   <div class="actions">
-    <%= form.submit "Add article" %>
+    <div class="articles-submit-button">
+    <%= form.submit "Add article", :class => "btn btn-danger" %>
   </div>
+</div>
+
 <% end %>
+
+
 
 
 <!-- t.string "title"
