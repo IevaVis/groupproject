@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    @latest_article = Article.last
   end
 
   # GET /articles/1/edit
@@ -84,7 +85,7 @@ class ArticlesController < ApplicationController
     # Make sure we have a user signed in
     def confirm_signed_in
       if !signed_in?
-        redirect_to root_path
+        redirect_to root_path, notice: "You have to be signed in to continue!"
       end
     end
 

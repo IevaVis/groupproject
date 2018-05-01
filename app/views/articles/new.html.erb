@@ -1,5 +1,43 @@
-<h1>New Article</h1>
 
-<%= render 'form', article: @article %>
 
-<%= link_to 'Back', articles_path %>
+<div class="container">
+	<div class="row">
+		<div class="post-articles-form col-md-6">
+
+		<div class="post-new-article">
+			<h4>Post New Article</h4>
+		</div>
+
+			<%= render 'form', article: Article.new %>
+
+		</div>
+<div class="col-md-1"></div>
+
+	<div class="form-article-outline col-md-4">
+		<p class="name">Posted by <%= link_to @latest_article.user.name, @latest_article.user %></p>
+	    <h6 class="form-article-heading"><%= @latest_article.title %></h6>
+	   <div class="form-article-link">
+	    <a href="<%= @latest_article.link %>" target="_blank"><%= "Read full article at #{URI.parse(@latest_article.link).host.downcase}" %></a>
+	  </div>
+	  <div id="article-image-outline">
+	    <% if !@latest_article.image.blank? %>
+	      <a href="<%= article_path(@latest_article.id) %>"><%= image_tag @latest_article.image, class: "img-fluid rounded mx-auto d-block", height: "200px", width: "400px" %></a>
+	    <% end %>
+	  </div>
+	  <div class="form-all-tags">
+	  <div class="article-tags-outline">
+	    <% @latest_article.tags.each do |tag| %>
+	      <span class="article-tag badge badge-primary"><%= tag %></span>
+	    <% end %>
+	  </div>
+	  </div>
+	  <%= link_to 'Show Article', @latest_article, :class => "btn btn-default btn-sm" %>
+	  <%= link_to 'See All Articles', articles_path, :class => "btn btn-default btn-sm" %>
+	</div>
+	<div class="col-md-1"></div>
+
+</div>
+</div>
+
+
+

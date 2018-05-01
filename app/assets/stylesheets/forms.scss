@@ -1,4 +1,6 @@
 
+/*css for signin, signup*/
+
 @-webkit-keyframes autofill {
     to {
         color: #666;
@@ -21,9 +23,8 @@ label.required:after {
     
 }
 
-
 .login-form{
-	margin-top: 60px;
+	margin-top: 30px;
 	box-shadow: 0px 0px 10px 1px grey;
 	border-radius: 5px;
 	padding-bottom: 20px;
@@ -31,7 +32,7 @@ label.required:after {
 }
 
 .title{
-	background: cornflowerblue;
+	background-color: #D8D8D8;
 	padding: 10px;
 	text-align: center;
 	color:#fff;
@@ -50,6 +51,72 @@ label.required:after {
 .btn-file:hover {
 	color: grey;
 }
+
+
+a {
+    color: grey;
+}
+
+/*css for post new article form*/
+
+.modal-content {
+    margin-top: 100px;
+    margin-left: -80px;
+    width: 550px;
+}
+
+.modal-title {
+    text-align: left;
+}
+
+.articles-submit-button {
+    text-align: center;
+}
+
+.explain-links, .explain-tags {
+    color: grey !important;
+    font-size: 12px;
+    font-family: georgia,serif;
+    cursor: pointer;
+
+}
+
+
+/*css for article show page*/
+
+
+.form-all-tags {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-article-heading {
+    font-family: georgia,serif;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.75rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.form-article-link {
+    text-align: center;
+    font-size: 14px;
+    line-height: 11px;
+    line-height: 0.6875rem;
+    font-weight: 400;
+    font-style: normal;
+    font-family: georgia,serif;
+    color: #4d4d4d;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+
+
+
 
 
 
