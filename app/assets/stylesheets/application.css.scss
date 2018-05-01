@@ -3,6 +3,7 @@
 @import "users";
 @import "articles";
 
+
 .navbar{
 	margin-bottom: 0px ;
 }
@@ -14,8 +15,15 @@
         width: 300px !important;
         top: 0px !important;
     }
-/*
- li.dropdown:last-child.dropdown-menu {
-  right: 0;
-  left: auto;
-}*/
+.li-centering-navbar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/*.btn-default {
+
+	margin-left: 5px
+}
+*/
