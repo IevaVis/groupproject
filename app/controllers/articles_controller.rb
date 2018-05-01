@@ -9,6 +9,8 @@ class ArticlesController < ApplicationController
     @articles = Article.all
     if params[:search]
       @articles = Article.search(params[:search]).order("created_at DESC")
+    elsif params[:tag]
+      @articles = Article.tag_search(params[:tag])
     else
       @articles = Article.all.order("created_at DESC")
     end
@@ -77,8 +79,12 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params[:article][:tags] = params[:article][:tags].split(",") unless params[:article][:tags].blank?
-      # p "final params", params[:article]
+      if !params[:article][:tags].blank?
+        params[:article][:tags] = params[:article][:tags].split(",")
+        params[:article][:tags].each_with_index do |tag, index|
+          params[:article][:tags][index] = tag.strip
+        end
+      end
       params.require(:article).permit(:user_id, :link, :title, :image, :is_active, :tags => [])
     end
 
@@ -103,7 +109,6 @@ class ArticlesController < ApplicationController
         params[:article][:title] = contents[0]
         # params[:article][:image] = contents[1].split("/")[-1] #this way of getting the article's img might not work in some cases
         params[:article][:image] = contents[1]
-        p URI.parse(params[:article][:link]).host.downcase
 
         # File.open(contents[1])
         # file_upload
