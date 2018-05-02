@@ -1,13 +1,13 @@
 <div class="post-outline container">
   <div class="post-details row">
-    <span class="col-md-4">
+    <span class="col-md-6">
       <a href="/users/<%= post.user.id %>">
       <span><%= image_tag User.find(post.user_id).avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless User.find(post.user_id).avatar.url.nil? %></span>
       <span><%= "#{post.user.name}" %></span>
     </a>
     </span>
-    <span class="col-md-4"><%= post.id %></span>
-    <span class="col-md-4"><%= post.created_at.asctime %></span>
+    <span class="col-md-1"></span>
+    <span class="col-md-5"><%= post.created_at.asctime %></span>
   </div>
   <br>
   <div class="post-text">
@@ -17,7 +17,9 @@
     <% if !post.comments.blank? %>
       <span id="<%= "view-comments-badge-#{post.id}" %>" class="view-comments-badge badge badge-secondary"><%= "View Comments (#{post.comments.length})" %></span>
     <% end %>
+    <% if signed_in? && current_user.expert? %>
     <span id="<%= "post-respond-badge-#{post.id}" %>" class="post-respond-badge badge badge-secondary">Add Comment</span>
+    <% end %>
   </div>
   <% # if !post.comments.blank? %>
     <div id="<%= "post-#{post.id}-comments" %>" class="post-comments toggled">
