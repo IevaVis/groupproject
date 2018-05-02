@@ -4,6 +4,10 @@
 @import "articles";
 
 
+html,body{
+	font-family: 'Noticia Text', serif;
+}
+
 .navbar{
 	margin-bottom: 0px ;
 }
@@ -26,6 +30,12 @@
 
 .post-new-article {
 	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.img-fluid.rounded.mx-auto.d-block{
+	height: 200px;
 }
 
 

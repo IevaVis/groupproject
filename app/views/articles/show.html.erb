@@ -1,16 +1,16 @@
 <div id="article">
-  <div id="site-name">
-    <a href="<%= @article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(@article.link).host.downcase}" %></span></a>
-  </div>
   <div id="article-heading-outline">
-    <h3 id="article-heading"><%= @article.title %></h3>
-  </div>
-  <div id="article-image-outline">
+    <div id="article-image-outline">
     <div>
       <% if !@article.image.nil? %>
-        <%= image_tag @article.image, id: "article-image", class: "img-fluid rounded", height: "300", width: "400" %>
+        <%= image_tag @article.image, id: "article-image", class: "img-fluid rounded", height: "500" %>
       <% end %>
     </div>
+  </div>
+   <div id="site-name">
+      <a href="<%= @article.link %>" target="_blank"><%= "Visit article at #{URI.parse(@article.link).host.downcase}" %></span></a>
+  </div>
+    <h3 id="article-heading"><%= @article.title %></h3>
   </div>
   <div id="tags">
     <% @article.tags.each do |tag| %>
@@ -26,18 +26,21 @@
   <div id="post-form-outline">
     <% if signed_in? && current_user.expert? %>
       <%= form_for Post.new, url: posts_path, remote: true do |form| %>
-        <%= form.label :text, "New Comment" %>
+        <div class="new-comment"><%= form.label :text, "New Comment" %></div>
         <%= form.text_area :text, type: 'text', rows: 4, id: "post-form-text", :class => "form-control", required: true, placeholder: "Suggest literature, documentaries, other articles, etc..." %>
         <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.hidden_field :article_id, value: @article.id %>
+        <div class="post-submit-button">
         <%= form.submit "Post", class: "btn btn-outline-secondary btn-sm" %>
+      </div>
       <% end %>
     <% end %>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_article_path(@article) if signed_in? && current_user.id == @article.user_id %> |
-<%= link_to 'Back', articles_path %>
+
+
+<%= link_to 'Back', root_path %>
 
 <script>
 
@@ -68,10 +71,51 @@
 
 <style>
 
-  .container {
+/*.container {
     margin: 0px;
     margin-right: 0px;
-  }
+  }*/
+
+#article-heading {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.75rem;
+    font-weight: 700;
+    font-style: italic;
+}
+
+#site-name {
+    font-family: georgia,serif;
+    text-align: center;
+    font-size: 16px;
+    line-height: 11px;
+    font-weight: 400;
+    color: #4d4d4d;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#article-image-outline {
+  text-align: center;
+}
+
+#tags {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.new-comment {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: georgia,serif;
+  font-style: italic;
+}
+
+.post-submit-button {
+  margin-top: 5px;
+}
+
 
   .post-outline, .comment-outline {
     padding: 8px;
@@ -85,9 +129,9 @@
 
   .comment-form-outline, .post-comments {
     position: absolute;
-    left: 800px;
+    left: 600px;
     top: 0px;
-    width: 400px;
+    width: 500px;
     background-color: rgba(150, 150, 150, .1);
     border-style: solid;
     border-width: 2px;
@@ -98,6 +142,7 @@
   .post-comments {
     overflow: scroll;
     max-height: 500px;
+
   }
 
 //  .post-outline:hover {
@@ -115,11 +160,13 @@
   .post-respond-badge {
     position: absolute;
     right: 0px;
+    margin-top: 10px;
   }
 
   .view-comments-badge {
     position: absolute;
     right: 100px;
+    margin-top: 10px;
   }
 
   .post-comments-badge-outline > :hover  {
@@ -129,13 +176,15 @@
   .post-respond-form-outline {
     position: absolute;
     right: 0px;
+
   }
 
   #article {
     background-color: rgba(150, 150, 150, .1);
+    box-shadow: 0px 0px 10px 1px grey;
     position: relative;
     left: 10vw;
-    width: 50vw;
+    width: 47vw;
     padding: 10px;
     border-radius: 4px;
   }

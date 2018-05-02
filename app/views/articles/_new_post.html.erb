@@ -1,11 +1,13 @@
 <div class="post-outline container">
   <div class="post-details row">
     <span class="col-md-4">
+      <a href="/users/<%= post.user.id %>">
       <span><%= image_tag User.find(post.user_id).avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless User.find(post.user_id).avatar.url.nil? %></span>
-      <span><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %></span>
+      <span><%= "#{post.user.name}" %></span>
+    </a>
     </span>
     <span class="col-md-4"><%= post.id %></span>
-    <span class="col-md-4"><%= post.created_at %></span>
+    <span class="col-md-4"><%= post.created_at.asctime %></span>
   </div>
   <br>
   <div class="post-text">
@@ -32,7 +34,9 @@
         <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.hidden_field :article_id, value: post.article_id %>
         <%= form.hidden_field :post_id, value: post.id %>
+        <div class="post-submit-button">
         <%= form.submit "Post", class: "btn btn-outline-secondary btn-sm" %>
+      </div>
       <% end %>
     </div>
   <% end %>

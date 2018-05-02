@@ -1,0 +1,35 @@
+<div class="modal" id="editModal-<%= article.id %>" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Article</h4>
+        <button class="close" data-dismiss="modal">&times;</button> 
+      </div>
+
+			 <div class="modal-body">
+				<%= form_for article do |form| %>
+				  <%= form.label :tags, "Add/Change/Remove Tags (separate with a comma)" %>
+				  <%= form.text_field :tags, value: article.tags.join(","), class: "form-control new-article-form" %>
+				  <%= form.hidden_field :link, value: article.link %>
+				  <%= form.hidden_field :image, value: article.image %>
+				  <%= form.hidden_field :title, value: article.title %>
+				  <%= form.hidden_field :is_active, value: article.is_active %>
+				  <%= form.hidden_field :user_id, value: article.user_id %>
+				
+
+				<div class="actions">
+          <div class="articles-submit-button">
+            <%= form.submit "Save changes", :class => "btn btn-danger" %>
+          </div>
+        </div>
+
+        <% end %>
+				<%= link_to 'Close', root_path %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
