@@ -17,12 +17,12 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    
   end
 
   # GET /articles/new
   def new
     @article = Article.new
-    @latest_article = Article.last
   end
 
   # GET /articles/1/edit

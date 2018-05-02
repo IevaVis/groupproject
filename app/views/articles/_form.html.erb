@@ -22,14 +22,14 @@
 
       <div class="modal-body">
         <div class="form-group">
-          <%= form.label :link, "Add a Link:" %>
+          <%= form.label :link, "Add a Link" %>
           <%= form.text_field :link,  :class => "form-control", placeholder: "e.g. https://example.com" %>
             <a title="Add a Link!" data-toggle="popover" data-trigger="hover" data-content="Posting an article allows you to share what you think would be of interest to others. Copy and add the URL of the article into the Link field. Include the http:// section of the URL. Your post will automatically link to the original source. Here you would be able to see an image and short preview of the article. Add post and wait for experts' comments." class="explain-links">How links work?</a>
         </div>
 
 
         <div class="form-group">
-          <%= form.label :tags, "Create Tags:" %>
+          <%= form.label :tags, "Create Tags" %>
           <%= form.text_field :tags, :class => "form-control", placeholder: "e.g. Democracy, diplomacy, immigration" %>
             <a title="Add tags!" data-toggle="popover" data-trigger="hover" data-content="Tags are keywords you assign to the article you are sharing. As a rule of thumb, keep your tags to two words or less. If you find yourself going over that limit, it may make more sense to create two separate tags—for example, rather than tagging something as 'Q1 expense report', you could tag it as 'Q1' and 'expense report'." class="explain-tags">How tags work?</a>
         </div>

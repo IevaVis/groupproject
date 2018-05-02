@@ -29,7 +29,7 @@
 					<%= link_to 'Edit Profile', edit_user_path(@user), :class => "btn btn-secondary btn-sm" %>
           <% end %>
 					<%= link_to 'Go To Homepage', root_path, :class => "btn btn-secondary btn-sm" %>
-					<% if @user.expert? %>
+					<% if @user == current_user && @user.expert? %>
 					<%= link_to 'Pending Articles', root_path, :class => "btn btn-secondary btn-sm" %>
 					<% end %>
 					</div>
@@ -47,23 +47,22 @@
 </div>
 
 
-<p id="notice"><%= notice %></p>
-<div id="articles" class="container-fluid">
-  <% (0..(@user_articles.length/3)).each do |row| %>
-    <%= content_tag :div, class: "row" do -%>
-      <% x, y = row*3, (row*3)+2 %>
-      <% @user_articles[x..y].each do |article| %>
-        <div id="article-outline" class="col-md-4">
-          <div id="site-name">
-            <a href="<%= article.link %>" target="_blank"><span class="bade badge-secondary badge-pill"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></span></a>
+
+<div class="container">
+  <div class="row">
+    <% @user_articles.each do |article| %>
+      <div class=" article col-md-4">
+        <div id="article-outline">
+        <div id="article-image-outline">
+            <% if !article.image.blank? %>
+              <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block"%></a>
+            <% end %>
+          </div>
+             <div id="site-name">
+            <a href="<%= article.link %>" target="_blank"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></span></a>
           </div>
           <div id="article-heading-outline">
-            <h6 class="article-heading"><%= article.title %></h6>
-          </div>
-          <div id="article-image-outline">
-            <% if !article.image.blank? %>
-              <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block", height: "200px", width: "300px" %></a>
-            <% end %>
+            <h6 class="article-heading"><a href="<%= article_path(article.id) %>"><%= (article.title) %></a></h6>
           </div>
           <div id="article-tags-outline">
             <% article.tags.each do |tag| %>
@@ -76,47 +75,84 @@
               <% end %>
             <% end %>
           </div>
-          <span><%= link_to 'Show', article %></span> |
-          <% if article_owner?(article) %>
-          <span><%= link_to 'Edit', edit_article_path(article) %></span> |
-          <span><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }%></span>
-          <% end %>
+
+
+<!-- show, edit, delete buttons in the article box -->
+
+<div class="article-box-buttons">
+          <span><%= link_to 'Show Comments', article %></span> 
+          <span><%= link_to '/ Edit', "#", data: {toggle: "modal", target: "#editModal"} if article_owner?(article) %></span>
+          <%= render 'articles/edit', article: article %>
+          <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
         </div>
-      <% end %>
-    <% end -%>
-  <% end %>
+        
+        
+        </div>
+      
+  
 </div>
 
-
+<% end %> 
+</div>
 
 <style>
 
+
+.article {
+  margin-bottom: 10px;
+}
+
   .article-heading {
+    margin-top: 10px;
     text-align: center;
-    border-bottom-style: dotted;
-    border-bottom-color: rgba(150, 150, 150, 1);
+    font-size: 18px;
+    line-height: 1.75rem;
+    font-weight: 700;
+
   }
 
-  .article-image {
-    position: relative;
+  .article-heading a {
+    color: black;
   }
 
   #article-outline {
+    position: relative;
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
     border-color: rgba(150, 150, 150, .6);
+    border-bottom: 2px solid grey;
+    height: 400px;
   }
 
   #article-heading-outline {
     margin-top: 6px;
   }
 
+
+#article-tags-outline {
+    text-align: center;
+  
+}
+
+.article-box-buttons {
+  bottom: 5px;
+  left: 20px;
+  position: absolute;
+}
+
+
+#site-name {
+    font-family: georgia,serif;
+    text-align: center;
+    font-size: 14px;
+    line-height: 11px;
+    font-weight: 400;
+    font-style: normal;
+    color: #4d4d4d;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
 </style>
-
-
-
-
-
-
-
