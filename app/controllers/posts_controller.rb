@@ -28,6 +28,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        article = Article.find(@post.article_id)
+        article.update(is_active: true) if !article.is_active?
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.js { render "articles/show", locals: {post: @post} }
         format.json { render :show, status: :created, location: @post }
