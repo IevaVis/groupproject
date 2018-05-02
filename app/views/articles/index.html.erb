@@ -19,9 +19,9 @@
               <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block", height: "200px", width: "300px" %></a>
             <% end %>
           </div>
-          <div id="article-tags-outline">
+          <div id="article-tags-outline" class="form-inline">
             <% article.tags.each do |tag| %>
-              <span class="article-tag badge badge-primary"><%= tag %></span>
+              <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-primary" %></span>
             <% end %>
 
             <!-- Eventually make this a badge that adds a tag to the article via AJAX -->

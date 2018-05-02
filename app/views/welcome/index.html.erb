@@ -17,7 +17,7 @@
           </div>
           <div id="article-tags-outline">
             <% article.tags.each do |tag| %>
-              <span class="article-tag badge badge-primary"><%= tag %></span>
+              <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-primary" %></span>
             <% end %>
 
             <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
@@ -107,5 +107,3 @@
 }
 
 </style>
-
-

@@ -20,11 +20,13 @@ html,body{
         width: 300px !important;
         top: 0px !important;
     }
-/*
- li.dropdown:last-child.dropdown-menu {
-  right: 0;
-  left: auto;
-}*/
+
+.li-centering-navbar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 
 .post-new-article {
 	margin-top: 20px;
@@ -35,4 +37,5 @@ html,body{
 .img-fluid.rounded.mx-auto.d-block{
 	height: 200px;
 }
+
 

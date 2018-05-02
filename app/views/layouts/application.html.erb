@@ -11,26 +11,38 @@
   <body>
     
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
   
+      <a class="navbar-brand" href="#">*AppName*</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
 
       <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">   
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">  
+      <div class="navbar-nav form-group col-md-4">
+        
 
-          <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-               <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
-                 <%= submit_tag "Search", :name => nil %>
-            <% end %>   
+          <%= form_tag(articles_path, :method => "get", id: "search-form", class: " input-group-append") do %>
+
+               <%= text_field_tag :search, params[:search], placeholder: "Search Articles", class: "form-control py-2"  %>
+                 <span class="input-group-append">
+                 <%= button_tag(type: "submit", class: "btn btn-outline-secondary") do %><i class="fa fa-search"></i></span>
+                <% end %>
+                  <% end %>
+      </div> 
+
+
+
+       
+ 
       <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->  
 
         
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto li-centering-navbar">
                 <!-- How it works -->
-                <li class="nav-item active" >
+                <li class="nav-item active " >
                   <%= link_to t("How it Works"), how_it_works_path, class: 'nav-link'  %>
                 </li>
                 <!-- How it works -->
@@ -42,39 +54,44 @@
               
               <ul class="nav navbar-nav">
       
-                    <li class="dropdown ">
-                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      
                         <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
 
-
-                        <% if current_user.avatar.present? %>
+                        
+                        <li class="li-centering-navbar"> <% if current_user.avatar.present? %>
                         <a href="/users/<%= current_user.id %>">
                         <%= image_tag current_user.avatar.thumb.url, :class => 'round-image nav-link dropdown-toggle' %>
                         </a>
                         <% else %>
-                        <img src="/assets/defaultpicture.png", class='profile-image-sizing nav-link dropdown-toggle'>
+
+                        <a href="/users/<%= current_user.id %>"><img src="/assets/defaultpicture.png", class='profile-image-sizing nav-link dropdown-toggle'></a>
+
                         <% end %>
+                        </li>
+
+                       
 
                         <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
-                        <span class="caret"></span>
-                        </a>
+                        <!-- <span class="caret"></span> -->
+                        
                         
                         <!-- dropdown-menu --><!-- dropdown-menu -->
-
+                        <li> <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#"></a>
 
                         <ul class="dropdown-menu dropdown-menu-right">
                           
-                          <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
-                          <li>
-                            <!-- Sign Out button -->
-                              <% if signed_in? -%>
-                              <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
-                              <% end %>
-                            <!-- Sign Out button -->
-                          </li>
+                              <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
+                              <li>
+                                <!-- Sign Out button -->
+                                  <% if signed_in? -%>
+                                  <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
+                                  <% end %>
+                                <!-- Sign Out button -->
+                              </li>
                         </ul>
+                        </li>
                         <!-- dropdown-menu --><!-- dropdown-menu -->
-                    </li>
+
                 </ul>
             
               <!-- if not signed in/logged in -->
@@ -161,20 +178,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!--    <div class="container-fluid main"> -->
+    <div >
 
       <div id="flash">
         <% flash.each do |key, value| %>
