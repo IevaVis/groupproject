@@ -8,11 +8,10 @@
     <link href="https://fonts.googleapis.com/css?family=Noticia+Text" rel="stylesheet">
   </head>
 
-  <body>
-    
+  <body>   
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
-  
+
       <a class="navbar-brand" href="#">*AppName*</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,113 +31,8 @@
                 <% end %>
                   <% end %>
       </div> 
-
-
-
-       
- 
-      <!-- Search BAr --><!-- Search BAr --><!-- Search BAr --><!-- Search BAr -->  
-
-        
-        <ul class="navbar-nav ml-auto li-centering-navbar">
-                <!-- How it works -->
-                <li class="nav-item active " >
-                  <%= link_to t("How it Works"), how_it_works_path, class: 'nav-link'  %>
-                </li>
-                <!-- How it works -->
-
-              <!-- If Logged in/signed in In -->
-              
-              <% if signed_in? -%>
-              <!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial -->
-              
-              <ul class="nav navbar-nav">
-      
-                      
-                        <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
-
-                        
-                        <li class="li-centering-navbar"> <% if current_user.avatar.present? %>
-                        <a href="/users/<%= current_user.id %>">
-                        <%= image_tag current_user.avatar.thumb.url, :class => 'round-image nav-link dropdown-toggle' %>
-                        </a>
-                        <% else %>
-
-                        <a href="/users/<%= current_user.id %>"><img src="/assets/defaultpicture.png", class='profile-image-sizing nav-link dropdown-toggle'></a>
-
-                        <% end %>
-                        </li>
-
-                       
-
-                        <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
-                        <!-- <span class="caret"></span> -->
-                        
-                        
-                        <!-- dropdown-menu --><!-- dropdown-menu -->
-                        <li> <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#"></a>
-
-                        <ul class="dropdown-menu dropdown-menu-right">
-                          
-                              <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
-                              <li>
-                                <!-- Sign Out button -->
-                                  <% if signed_in? -%>
-                                  <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
-                                  <% end %>
-                                <!-- Sign Out button -->
-                              </li>
-                        </ul>
-                        </li>
-                        <!-- dropdown-menu --><!-- dropdown-menu -->
-
-                </ul>
-            
-              <!-- if not signed in/logged in -->
-              <% else %>
-              
-                  <!-- Member Link -->
-
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Member
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <%= link_to t(".sign_in"), sign_in_path(role: "regular"), class: 'dropdown-item' %>
-                      <%= link_to t(".sign_up"), sign_up_path(role: "regular"), class: 'dropdown-item' %>
-                    </div>
-                  </li>
-                  <!-- Expert Link -->
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Expert
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <%= link_to t(".sign_in"), sign_in_path(role: "expert"), class: 'dropdown-item' %>
-                      <%= link_to t(".sign_up"), sign_up_path(role: "expert"), class: 'dropdown-item' %>
-                    </div>
-                  </li>
-
-              <% end %>
-                
-                
-            
-        </ul>
-
-          <!-- Search Form for articles -->
-        <!--   <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-           -->
-          <!-- needs model and controller to -->
-
-          <!-- form ends here -->
-      </div>
-
-    </nav>
-
-<div class="container">
+<!-- 
+      Post new article -->
 
 <% if signed_in? %>
 
@@ -150,7 +44,7 @@
 <% else %>
 
   <div class="post-new-article">
-  <div data-toggle="modal", data-target="#addarticleModal", class="btn btn-danger">New Article</div>
+    <div data-toggle="modal", data-target="#addarticleModal", class="btn btn-danger">New Article</div>
   </div>
 
   <div id="addarticleModal" class="modal fade" role="dialog">
@@ -173,23 +67,95 @@
   </div>
 <% end %>
 </div>
-<!--  -->
+        
+        <ul class="navbar-nav ml-auto li-centering-navbar">
 
+                <!-- How it works -->
+                <li class="nav-item active " >
+                  <%= link_to t("How it Works"), how_it_works_path, class: 'nav-link'  %>
+                </li>
 
+              <!-- If Logged in/signed in In -->
+              
+              <% if signed_in? -%>
+              <!-- Trial --><!-- Trial --><!-- Trial --><!-- Trial -->
+              
+              <ul class="nav navbar-nav">
+      
+                      
+                        <!-- Image goes here --><!-- Image goes here --><!-- Image goes here --><!-- Image goes here -->
 
+                        
+                        <li class="li-centering-navbar"> <% if current_user.avatar.present? %>
+                        <a href="/users/<%= current_user.id %>">
+                        <%= image_tag current_user.avatar.thumb.url, :class => 'round-image nav-link dropdown-toggle' %>
+                        </a>
+                        <% else %>
 
-    <div >
+                        <a href="/users/<%= current_user.id %>"><img src="/assets/defaultpicture.png", class='profile-image-sizing nav-link dropdown-toggle'></a>
+
+                        <% end %>
+                        </li>
+                        
+                        
+                        <!-- dropdown-menu --><!-- dropdown-menu -->
+                        <li> <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#"></a>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          
+                              <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
+                              <li>
+                                <!-- Sign Out button -->
+                                  <% if signed_in? -%>
+                                  <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
+                                  <% end %>
+            
+                              </li>
+                        </ul>
+                        </li>
+                    
+
+                </ul>
+            
+              <!-- if not signed in/logged in -->
+              <% else %>
+              
+                  <!-- Member Link -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Member
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <%= link_to t(".sign_in"), sign_in_path(role: "regular"), class: 'dropdown-item' %>
+                      <%= link_to t(".sign_up"), sign_up_path(role: "regular"), class: 'dropdown-item' %>
+                    </div>
+                  </li>
+                  <!-- Expert Link -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Expert
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <%= link_to t(".sign_in"), sign_in_path(role: "expert"), class: 'dropdown-item' %>
+                      <%= link_to t(".sign_up"), sign_up_path(role: "expert"), class: 'dropdown-item' %>
+                    </div>
+                  </li>
+
+              <% end %>    
+            
+        </ul>
+
+      </div>
+
+    </nav>
 
       <div id="flash">
         <% flash.each do |key, value| %>
-        <div class="alert alert-danger" role="alert"><%=h value %></div>
+        <div class="alert alert-secondary" role="alert"><%=h value %></div>
         <% end %>
       </div>
-    <!-- </div> -->
 
       <%= yield %>
     
-
-
   </body>
 </html>

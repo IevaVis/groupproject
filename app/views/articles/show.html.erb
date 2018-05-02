@@ -14,7 +14,7 @@
   </div>
   <div id="tags">
     <% @article.tags.each do |tag| %>
-      <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-primary" %></span>
+      <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-danger" %></span>
     <% end %>
   </div>
   <br>
@@ -71,10 +71,6 @@
 
 <style>
 
-/*.container {
-    margin: 0px;
-    margin-right: 0px;
-  }*/
 
 #article-heading {
     margin-top: 10px;
@@ -129,8 +125,8 @@
 
   .comment-form-outline, .post-comments {
     position: absolute;
-    left: 600px;
-    top: 0px;
+    left: 48vw;
+    bottom: 5px;
     width: 500px;
     background-color: rgba(150, 150, 150, .1);
     border-style: solid;
@@ -160,13 +156,13 @@
   .post-respond-badge {
     position: absolute;
     right: 0px;
-    margin-top: 10px;
+    margin-top: 12px;
   }
 
   .view-comments-badge {
     position: absolute;
     right: 100px;
-    margin-top: 10px;
+    margin-top: 12px;
   }
 
   .post-comments-badge-outline > :hover  {
