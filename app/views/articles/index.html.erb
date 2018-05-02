@@ -1,47 +1,65 @@
-<div id="articles-container" class="container-fluid">
+<div class="container-fluid">
   <div class="row">
-    <% @articles.each do |article| %>
-      <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
-      <div class=" article col-md-4">
-        <!-- <div id="article-outline"> -->
-        <%= content_tag :div, class: ["article-outline", article.is_active? ? "article-active" : "article-inactive"] do -%>
-          <div id="article-image-outline">
-            <% if !article.image.blank? %>
-            <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block"%></a>
-            <% end %>
-          </div>
-          <div id="site-name">
-            <a href="<%= article.link %>" target="_blank"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></span></a>
-          </div>
-          <div id="article-heading-outline">
-            <h6 class="article-heading"><a href="<%= article_path(article.id) %>"><%= (article.title) %></a></h6>
-          </div>
-          <div id="article-tags-outline">
-            <% article.tags.each do |tag| %>
-              <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-danger" %></span>
+    <div class="col-md-10">
+      <div class="row">
+      <% @articles.each do |article| %>
+        <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
 
-            <% end %>
-            <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
-            <% if article_owner?(article) %>
-            <% form_for article, url: articles_path, method: "get" do |form| %>
-            <% end %>
-            <% end %>
-          </div>
-          <!-- show, edit, delete buttons in the article box -->
-          <div class="article-box-buttons">
-            <span><%= link_to 'Show Comments', article %></span>
-            <span><%= link_to ' / Edit', "#", data: {toggle: "modal", target: "#editModal-#{article.id}"} if article_owner?(article) %></span>
-            <%= render 'articles/edit', article: article %>
-            <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
-          </div>
-        <!-- </div> -->
-        <% end -%>
-      </div>
+        <div class=" article col-md-4">
+          <%= content_tag :div, class: ["article-outline", article.is_active? ? "article-active" : "article-inactive"] do -%>
+
+            <div id="article-image-outline">
+              <% if !article.image.blank? %>
+                <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block"%></a>
+              <% end %>
+            </div>
+
+            <div id="site-name">
+              <a href="<%= article.link %>" target="_blank"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></a>
+            </div>
+
+            <div id="article-heading-outline">
+              <h6 class="article-heading"><a href="<%= article_path(article.id) %>"><%= (article.title) %></a></h6>
+            </div>
+
+            <div id="article-tags-outline">
+              <% article.tags.each do |tag| %>
+                <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-danger" %></span>
+              <% end %>
+              <% if article_owner?(article) %>
+                <% form_for article, url: articles_path, method: "get" do |form| %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="article-box-buttons">
+              <span><%= link_to 'Show Comments', article %></span>
+              <span><%= link_to ' / Edit', "#", data: {toggle: "modal", target: "#editModal-#{article.id}"} if article_owner?(article) %></span>
+                <%= render 'articles/edit', article: article %>
+              <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
+            </div>
+    
+           <% end -%>
+        </div>
       <% end %>
     <% end %>
   </div>
 </div>
 
+
+
+    <div class="all-tags-block-outline col-md-1">
+      <div class="row">
+        <div class="all-tags-block">
+          <p class="tags-title">Popular Tags</p>
+            <% @tags.each do |tag| %>
+             <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "badge badge-secondary" %></span>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
 
@@ -111,5 +129,19 @@
       margin-bottom: 5px;
       cursor: pointer;
   }
+
+.all-tags-block-outline {
+  position: fixed;
+  right: 5%;
+  font-size: 17px;
+}
+
+.badge-secondary {
+  background-color: #c0c0c0;
+}
+
+.tags-title {
+
+}
 
 </style>

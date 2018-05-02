@@ -3,6 +3,7 @@ class User < ApplicationRecord
     enum role: [:regular, :expert, :admin]
     has_many :articles
     has_many :posts
+    has_many :comments
    	has_many :authentications, dependent: :destroy
     mount_uploader :avatar, AvatarUploader
   	validates :first_name, :last_name, presence: true
