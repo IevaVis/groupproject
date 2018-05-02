@@ -2,7 +2,7 @@
   <div class="post-details row">
     <span class="col-md-6">
       <a href="/users/<%= post.user.id %>">
-      <span><%= image_tag User.find(post.user_id).avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless User.find(post.user_id).avatar.url.nil? %></span>
+      <span><%= image_tag !User.find(post.user_id).avatar.url.nil? ? User.find(post.user_id).avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
       <span><%= "#{post.user.name}" %></span>
     </a>
     </span>
