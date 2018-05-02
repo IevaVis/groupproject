@@ -2,7 +2,7 @@
   <div class="row">
     <% @articles.each do |article| %>
       <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
-      <div class=" article col-md-4">
+      <div class="article col-md-4">
         <!-- <div id="article-outline"> -->
         <%= content_tag :div, class: ["article-outline", article.is_active? ? "article-active" : "article-inactive"] do -%>
           <div id="article-image-outline">
@@ -19,7 +19,6 @@
           <div id="article-tags-outline">
             <% article.tags.each do |tag| %>
               <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-danger" %></span>
-
             <% end %>
             <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
             <% if article_owner?(article) %>
@@ -28,6 +27,27 @@
             <% end %>
           </div>
           <!-- show, edit, delete buttons in the article box -->
+          <% if article.posts.length >= 1 %>
+            <% post = article.posts.first %>
+            <br>
+            <div class="article-first-post">
+              <div class="article-first-post-heading">First Post</div>
+              <div class="post-details row">
+                <span class="col-md-6">
+                  <a href="/users/<%= post.user.id %>">
+                  <span><%= image_tag !User.find(post.user_id).avatar.url.nil? ? User.find(post.user_id).avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
+                  <span><%= "#{post.user.name}" %></span>
+                </a>
+                </span>
+                <span class="col-md-1"></span>
+                <span class="col-md-5"><%= post.created_at.asctime %></span>
+              </div>
+              <!-- <br> -->
+              <div class="post-text">
+                <%= simple_format post.text %>
+              </div>
+            </div>
+          <% end %>
           <div class="article-box-buttons">
             <span><%= link_to 'Show Comments', article %></span>
             <span><%= link_to ' / Edit', "#", data: {toggle: "modal", target: "#editModal-#{article.id}"} if article_owner?(article) %></span>
@@ -49,13 +69,33 @@
     margin-bottom: 10px;
   }
 
+  .article-first-post {
+    position: relative;
+    padding: 4px;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-color: rgba(150, 150, 150, .6);
+    font-size: 14px;
+    background-color: white;
+    max-height: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .article-first-post-heading {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-color: rgba(150, 150, 150, .6);
+  }
+
   .article-heading {
     margin-top: 10px;
     text-align: center;
     font-size: 18px;
     line-height: 1.75rem;
     font-weight: 700;
-
   }
 
   .article-heading a {
@@ -68,8 +108,9 @@
     border-style: solid;
     border-width: 2px;
     border-color: rgba(30, 150, 150, .6);
-    height: 450px;
-    background-color: white;
+    /* height: 550px; */
+    background-color: rgba(150, 150, 150, .1);
+    box-shadow: 0px 0px 10px 1px grey;
   }
 
   .article-outline.article-inactive {
@@ -78,8 +119,9 @@
     border-style: solid;
     border-width: 2px;
     border-color: rgba(150, 30, 30, .6);
-    height: 450px;
-    background-color: white;
+    /* height: 550px; */
+    background-color: rgba(150, 150, 150, .1);
+    box-shadow: 0px 0px 10px 1px grey;
   }
 
   #article-heading-outline {
@@ -93,9 +135,10 @@
   }
 
   .article-box-buttons {
+    margin-top: 10px;
     bottom: 5px;
     left: 20px;
-    position: absolute;
+    position: relative;
   }
 
 
