@@ -14,7 +14,7 @@
   </div>
   <div id="tags">
     <% @article.tags.each do |tag| %>
-      <span class="article-tag badge badge-primary"><%= "#{tag}" %></span>
+      <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-primary" %></span>
     <% end %>
   </div>
   <br>

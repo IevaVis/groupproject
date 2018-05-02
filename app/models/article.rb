@@ -8,4 +8,8 @@ class Article < ApplicationRecord
   def self.search(search)
   	where("title ILIKE ?",  "%#{search}%" )
   end
+
+  def self.tag_search(tag)
+    where("? = ANY(tags)", "#{tag}")
+  end
 end
