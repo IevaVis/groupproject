@@ -1,14 +1,16 @@
-<div class="container">
+<div id="articles-container" class="container">
   <div class="row">
     <% @articles.each do |article| %>
+      <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
       <div class=" article col-md-4">
-        <div id="article-outline">
-        <div id="article-image-outline">
+        <!-- <div id="article-outline"> -->
+        <%= content_tag :div, class: ["article-outline", article.is_active? ? "article-active" : "article-inactive"] do -%>
+          <div id="article-image-outline">
             <% if !article.image.blank? %>
-              <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block"%></a>
+            <a href="<%= article_path(article.id) %>"><%= image_tag article.image, class: "img-fluid rounded mx-auto d-block"%></a>
             <% end %>
           </div>
-             <div id="site-name">
+          <div id="site-name">
             <a href="<%= article.link %>" target="_blank"><%= "Visit article at #{URI.parse(article.link).host.downcase}" %></span></a>
           </div>
           <div id="article-heading-outline">
@@ -16,30 +18,25 @@
           </div>
           <div id="article-tags-outline">
             <% article.tags.each do |tag| %>
-              <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-primary" %></span>
+            <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "article-tag badge badge-primary" %></span>
             <% end %>
-
             <!-- Eventually make this a badge that adds a tag to the article via AJAX -->
             <% if article_owner?(article) %>
-              <% form_for article, url: articles_path, method: "get" do |form| %>
-              <% end %>
+            <% form_for article, url: articles_path, method: "get" do |form| %>
+            <% end %>
             <% end %>
           </div>
-
-<!-- show, edit, delete buttons in the article box -->
-
-      <div class="article-box-buttons">
-
-        <span><%= link_to 'Show Comments', article %></span>
-          <span><%= link_to ' / Edit', "#", data: {toggle: "modal", target: "#editModal-#{article.id}"} if article_owner?(article) %></span>
+          <!-- show, edit, delete buttons in the article box -->
+          <div class="article-box-buttons">
+            <span><%= link_to 'Show Comments', article %></span>
+            <span><%= link_to ' / Edit', "#", data: {toggle: "modal", target: "#editModal-#{article.id}"} if article_owner?(article) %></span>
             <%= render 'articles/edit', article: article %>
-           <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
+            <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
+          </div>
+        <!-- </div> -->
+        <% end -%>
       </div>
-
-
-
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -47,10 +44,9 @@
 
 <style>
 
-
-.article {
-  margin-bottom: 10px;
-}
+  .article {
+    margin-bottom: 10px;
+  }
 
   .article-heading {
     margin-top: 10px;
@@ -65,14 +61,26 @@
     color: black;
   }
 
-  #article-outline {
+  .article-outline.article-active {
     position: relative;
-    border-radius: 4px;
+    border-radius: 6px;
     border-style: solid;
-    border-width: 1px;
-    border-color: rgba(150, 150, 150, .6);
+    border-width: 2px;
+    border-color: rgba(30, 150, 150, .6);
     border-bottom: 2px solid grey;
     height: 400px;
+    background-color: white;
+  }
+
+  .article-outline.article-inactive {
+    position: relative;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(150, 30, 30, .6);
+    border-bottom: 2px solid grey;
+    height: 400px;
+    background-color: white;
   }
 
   #article-heading-outline {
@@ -80,29 +88,29 @@
   }
 
 
-#article-tags-outline {
-    text-align: center;
+  #article-tags-outline {
+      text-align: center;
 
-}
+  }
 
-.article-box-buttons {
-  bottom: 5px;
-  left: 20px;
-  position: absolute;
-}
+  .article-box-buttons {
+    bottom: 5px;
+    left: 20px;
+    position: absolute;
+  }
 
 
-#site-name {
-    font-family: georgia,serif;
-    text-align: center;
-    font-size: 14px;
-    line-height: 11px;
-    font-weight: 400;
-    font-style: normal;
-    color: #4d4d4d;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
+  #site-name {
+      font-family: georgia,serif;
+      text-align: center;
+      font-size: 14px;
+      line-height: 11px;
+      font-weight: 400;
+      font-style: normal;
+      color: #4d4d4d;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      cursor: pointer;
+  }
 
 </style>
