@@ -8,9 +8,7 @@ html,body{
 	font-family: 'Noticia Text', serif;
 }
 
-.navbar{
-	margin-bottom: 20px;
-}
+
 
 .main {
 	margin-top: 5%;
@@ -37,3 +35,18 @@ html,body{
 .img-fluid.rounded.mx-auto.d-block{
 	height: 250px;
 }
+
+
+.jumbotron {
+	background-size: cover, contain;
+	height: 50vh;
+	margin-bottom: 30vh;
+}
+
+.w3-container {
+	width: 100%;
+}
+
+
+
+
