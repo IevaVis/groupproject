@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div id="articles-container" class="container-fluid">
   <div class="row">
     <div class="col-md-10">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
@@ -32,7 +32,7 @@
                 <% end %>
               <% end %>
             </div>
-          
+
             <% if article.posts.length >= 1 %>
             <% post = article.posts.first %>
             <br>
@@ -83,14 +83,19 @@
   </div>
 </div>
 
-
+<script>
+  $(document).ready(function() {
+    if(!$(".post-new-article").length) {
+      $("#articles-container").before("<div class='container-fluid'><%=j render partial: 'articles/new_article_button' %></div>");
+    }
+  });
+</script>
 
 <style>
 
-
-.container-fluid {
-  margin-top: 10px;
-}
+  .container-fluid {
+    margin-top: 10px;
+  }
 
   .box {
     margin-bottom: 10px;
@@ -189,17 +194,16 @@
       cursor: pointer;
   }
 
-.all-tags-block-outline {
-  font-size: 17px;
-  right: -2%;
-  
+  .all-tags-block-outline {
+    font-size: 17px;
+    right: -2%;
 
-}
 
-.badge-secondary {
-  background-color: #c0c0c0;
-}
+  }
 
+  .badge-secondary {
+    background-color: #c0c0c0;
+  }
 
 
 </style>
