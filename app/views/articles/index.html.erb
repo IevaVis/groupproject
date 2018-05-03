@@ -1,11 +1,12 @@
 <div id="articles-container" class="container-fluid">
   <div class="row">
     <div class="col-md-10">
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <div class="row">
         <% @articles.each do |article| %>
           <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
 
-        <div class=" article col-md-4">
+        <div class="box col-md-4">
           <%= content_tag :div, class: ["article-outline", article.is_active? ? "article-active" : "article-inactive"] do -%>
 
             <div id="article-image-outline">
@@ -60,12 +61,12 @@
                 <%= render 'articles/edit', article: article %>
               <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
             </div>
-
            <% end -%>
         </div>
       <% end %>
     <% end %>
   </div>
+</div>
 </div>
 
 
@@ -96,8 +97,9 @@
     margin-top: 10px;
   }
 
-  .article {
+  .box {
     margin-bottom: 10px;
+
   }
 
   .post-details {
