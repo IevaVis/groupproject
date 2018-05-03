@@ -15,6 +15,7 @@
 //= require jquery
 //= require popper
 //= require bootstrap
+//= require masonry/jquery.masonry
 //= require_tree .
 
 
@@ -27,3 +28,14 @@ $(document).on('turbolinks:load', function() {
 $(document).on('turbolinks:load', function(){
     $('[data-toggle="popover"]').popover();   
 });
+
+$(function(){
+
+  $('#masonry-container').masonry({
+    itemSelector: '.box',
+    columnWidth: 10,
+    gutterWidth: 40,
+  });
+
+});
+
