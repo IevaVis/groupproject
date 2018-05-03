@@ -22,16 +22,9 @@
 $(document).on('turbolinks:load', function() {
 	$('.file-upload').on('change', function(){
 		$('#file-upload-info').html(this.files[0].name);
-	})
-});
-
-$(document).on('turbolinks:load', function(){
-    $('[data-toggle="popover"]').popover();   
-});
-
-$(function(){
-
-  $('#masonry-container').masonry({
+	});
+  $('[data-toggle="popover"]').popover();   
+	$('#masonry-container').masonry({
     itemSelector: '.box',
     columnWidth: 10,
     gutterWidth: 40,

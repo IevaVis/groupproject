@@ -1,3 +1,4 @@
+<br>
 <div id="article">
   <div id="article-heading-outline">
     <div id="article-image-outline">
@@ -39,8 +40,9 @@
 </div>
 
 
-
+<div class="back-button">
 <%= link_to 'Back', root_path, :class => "btn btn-secondary" %>
+</div>
 
 <script>
 
@@ -156,13 +158,13 @@
   .post-respond-badge {
     position: absolute;
     right: 0px;
-    margin-top: 12px;
+    /* margin-top: 5px; */
   }
 
   .view-comments-badge {
     position: absolute;
     right: 100px;
-    margin-top: 12px;
+    /* margin-top: 5px; */
   }
 
   .post-comments-badge-outline > :hover  {
@@ -183,6 +185,11 @@
     width: 47vw;
     padding: 10px;
     border-radius: 4px;
+  }
+
+  .back-button {
+    margin-top: 10px;
+    margin-left: 30vw;
   }
 
 </style>
