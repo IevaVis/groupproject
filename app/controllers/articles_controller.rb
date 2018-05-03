@@ -84,6 +84,7 @@ class ArticlesController < ApplicationController
         params[:article][:tags] = params[:article][:tags].split(",")
         params[:article][:tags].each_with_index do |tag, index|
           params[:article][:tags][index] = tag.strip
+          params[:article][:tags][index] = tag.strip.titleize
         end
       end
       params.require(:article).permit(:user_id, :link, :title, :image, :is_active, :tags => [])
