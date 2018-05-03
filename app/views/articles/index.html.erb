@@ -31,6 +31,28 @@
                 <% end %>
               <% end %>
             </div>
+          
+               <% if article.posts.length >= 1 %>
+            <% post = article.posts.first %>
+            <br>
+            <div class="article-first-post">
+              <div class="article-first-post-heading">First Post</div>
+              <div class="post-details row">
+                <span class="col-md-6">
+                  <a href="/users/<%= post.user.id %>">
+                  <span><%= image_tag !User.find(post.user_id).avatar.url.nil? ? User.find(post.user_id).avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
+                  <span><%= "#{post.user.name}" %></span>
+                </a>
+                </span>
+                <span class="col-md-1"></span>
+                <span class="col-md-5"><%= post.created_at.asctime %></span>
+              </div>
+              <!-- <br> -->
+              <div class="post-text">
+                <%= simple_format post.text %>
+              </div>
+            </div>
+          <% end %>
 
             <div class="article-box-buttons">
               <span><%= link_to 'Show Comments', article %></span>
@@ -45,8 +67,6 @@
     <% end %>
   </div>
 </div>
-
-
 
     <div class="all-tags-block-outline col-md-1">
       <div class="row">
@@ -67,13 +87,33 @@
     margin-bottom: 10px;
   }
 
+  .article-first-post {
+    position: relative;
+    padding: 4px;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-color: rgba(150, 150, 150, .6);
+    font-size: 14px;
+    background-color: white;
+    max-height: 200px;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+
+  .article-first-post-heading {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-color: rgba(150, 150, 150, .6);
+  }
+
   .article-heading {
     margin-top: 10px;
     text-align: center;
     font-size: 18px;
     line-height: 1.75rem;
     font-weight: 700;
-
   }
 
   .article-heading a {
@@ -86,8 +126,9 @@
     border-style: solid;
     border-width: 2px;
     border-color: rgba(30, 150, 150, .6);
-    height: 450px;
-    background-color: white;
+    /* height: 550px; */
+    background-color: rgba(150, 150, 150, .1);
+    box-shadow: 0px 0px 10px 1px grey;
   }
 
   .article-outline.article-inactive {
@@ -96,8 +137,9 @@
     border-style: solid;
     border-width: 2px;
     border-color: rgba(150, 30, 30, .6);
-    height: 450px;
-    background-color: white;
+    /* height: 550px; */
+    background-color: rgba(150, 150, 150, .1);
+    box-shadow: 0px 0px 10px 1px grey;
   }
 
   #article-heading-outline {
@@ -111,11 +153,11 @@
   }
 
   .article-box-buttons {
+    margin-top: 10px;
     bottom: 5px;
     left: 20px;
-    position: absolute;
+    position: relative;
   }
-
 
   #site-name {
       font-family: georgia,serif;
@@ -140,8 +182,6 @@
   background-color: #c0c0c0;
 }
 
-.tags-title {
 
-}
 
 </style>

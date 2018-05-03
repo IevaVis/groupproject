@@ -3,7 +3,7 @@
     <% comment_user = User.find(comment.user_id) %>
     <span class="col-md-6">
       <a href="/users/<%= comment_user.id %>">
-      <span><%= image_tag comment_user.avatar.url, height: "40", width: "40", style: "border-radius: 40px;" unless comment_user.avatar.url.nil? %></span>
+      <span><%= image_tag !comment_user.avatar.url.nil? ? comment_user.avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
       <span><%= "#{comment_user.name}" %></span>
     </a>
     </span>

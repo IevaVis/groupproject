@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    
+
   end
 
   # GET /articles/new
@@ -83,7 +83,7 @@ class ArticlesController < ApplicationController
       if !params[:article][:tags].blank?
         params[:article][:tags] = params[:article][:tags].split(",")
         params[:article][:tags].each_with_index do |tag, index|
-          params[:article][:tags][index] = tag.strip
+          params[:article][:tags][index] = tag.strip.titleize
         end
       end
       params.require(:article).permit(:user_id, :link, :title, :image, :is_active, :tags => [])
