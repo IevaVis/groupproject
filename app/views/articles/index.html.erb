@@ -32,40 +32,18 @@
               <% end %>
             </div>
           
-               <% if article.posts.length >= 1 %>
-            <% post = article.posts.first %>
-            <br>
-            <div class="article-first-post">
-              <div class="article-first-post-heading">First Post</div>
-              <div class="post-details row">
-                <span class="col-md-6">
-                  <a href="/users/<%= post.user.id %>">
-                  <span><%= image_tag !User.find(post.user_id).avatar.url.nil? ? User.find(post.user_id).avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
-                  <span><%= "#{post.user.name}" %></span>
-                </a>
-                </span>
-                <span class="col-md-1"></span>
-                <span class="col-md-5"><%= post.created_at.asctime %></span>
-              </div>
-              <!-- <br> -->
-              <div class="post-text">
-                <%= simple_format post.text %>
-              </div>
-            </div>
-          <% end %>
-
             <% if article.posts.length >= 1 %>
             <% post = article.posts.first %>
             <br>
             <div class="article-first-post">
-              <div class="article-first-post-heading">First Post</div>
+              <!-- <div class="article-first-post-heading">First Post</div> -->
               <div class="post-details row">
-                <span class="col-md-6">
+               <!--  <span class="col-md-6"> -->
                   <a href="/users/<%= post.user.id %>">
                   <span><%= image_tag !User.find(post.user_id).avatar.url.nil? ? User.find(post.user_id).avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
                   <span><%= "#{post.user.name}" %></span>
                 </a>
-                </span>
+                <!-- </span> -->
                 <span class="col-md-1"></span>
                 <span class="col-md-5"><%= post.created_at.asctime %></span>
               </div>
@@ -77,7 +55,7 @@
           <% end %>
 
             <div class="article-box-buttons">
-              <span><%= link_to 'Show Comments', article %></span>
+              <span><%= link_to 'Show All Comments', article %></span>
               <span><%= link_to ' / Edit', "#", data: {toggle: "modal", target: "#editModal-#{article.id}"} if article_owner?(article) %></span>
                 <%= render 'articles/edit', article: article %>
               <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
@@ -90,10 +68,11 @@
   </div>
 </div>
 
+
     <div class="all-tags-block-outline col-md-1">
       <div class="row">
         <div class="all-tags-block">
-          <p class="tags-title">Popular Tags</p>
+          <p class="btn btn-danger">Popular Tags</p>
             <% @tags.each do |tag| %>
              <span><%= link_to "#{tag}", {controller: "articles", action: "index", tag: tag}, class: "badge badge-secondary" %></span>
             <% end %>
@@ -103,12 +82,23 @@
   </div>
 </div>
 
+
+
 <style>
+
+
+.container-fluid {
+  margin-top: 10px;
+}
 
   .article {
     margin-bottom: 10px;
   }
 
+  .post-details {
+    margin-left: 2%;
+    margin-bottom: 2%;
+  }
 
   .article-first-post {
     position: relative;
@@ -125,12 +115,13 @@
     text-overflow: ellipsis;
   }
 
-
+/*
   .article-first-post-heading {
+    font-family: georgia,serif;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-color: rgba(150, 150, 150, .6);
-  }
+  }*/
 
   .article-heading {
     margin-top: 10px;
@@ -197,9 +188,10 @@
   }
 
 .all-tags-block-outline {
-  position: fixed;
-  right: 5%;
   font-size: 17px;
+  right: -2%;
+  
+
 }
 
 .badge-secondary {

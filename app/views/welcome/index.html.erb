@@ -5,14 +5,37 @@
   <h1 class="display-4">Real News Matter</h1>
   <p class="lead">Important news should be substantiated</p>
   <hr class="my-4">
-  <p>xxxxx</p>
+  <p><strong>With an army of experts and academics as a part of our network, we make sure your news gets substantiated. All you need to do is share a link of an article you are interested in and our experts will point you to resources which are relevent to the news posted.</strong></p>
   
 
 </div>
 <!-- render page --><!-- render page --><!-- render page --><!-- render page --><!-- render page -->
-
+<div class="container-fluid">
+<p class="posted-articles">Recently Added Articles</p>
+</div>
 
 <%= render template: "articles/index" %>
+
+<style>
+
+.jumbotron {
+	background-size: cover, contain;
+	height: 50vh;
+	margin-bottom: 30vh;
+}
+
+.w3-container {
+	width: 100%;
+}
+
+.posted-articles {
+  font-weight: 700;
+  font-size: 20px;
+  color: grey;
+  
+}
+
+</style>
 
 
 

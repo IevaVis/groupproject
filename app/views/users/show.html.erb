@@ -48,6 +48,7 @@
 
 
 <div class="container-fluid">
+  <p class="posted-articles">Shared Articles</p>
   <div class="row">
     <% @user_articles.each do |article| %>
       <div class=" article col-md-4">
@@ -96,6 +97,17 @@
 
 <style>
 
+.jumbotron {
+  margin-top: 20px;
+  
+}
+
+.posted-articles {
+  font-weight: 700;
+  font-size: 20px;
+  color: grey;
+  
+}
 
 .article {
   margin-bottom: 10px;
