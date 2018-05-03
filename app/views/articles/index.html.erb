@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div id="articles-container" class="container-fluid">
   <div class="row">
     <div class="col-md-10">
       <div class="row">
@@ -31,7 +31,7 @@
                 <% end %>
               <% end %>
             </div>
-          
+
             <% if article.posts.length >= 1 %>
             <% post = article.posts.first %>
             <br>
@@ -60,7 +60,7 @@
                 <%= render 'articles/edit', article: article %>
               <span><%= link_to ' / Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } if article_owner?(article) %></span>
             </div>
-    
+
            <% end -%>
         </div>
       <% end %>
@@ -82,14 +82,19 @@
   </div>
 </div>
 
-
+<script>
+  $(document).ready(function() {
+    if(!$(".post-new-article").length) {
+      $("#articles-container").before("<div class='container-fluid'><%=j render partial: 'articles/new_article_button' %></div>");
+    }
+  });
+</script>
 
 <style>
 
-
-.container-fluid {
-  margin-top: 10px;
-}
+  .container-fluid {
+    margin-top: 10px;
+  }
 
   .article {
     margin-bottom: 10px;
@@ -187,17 +192,16 @@
       cursor: pointer;
   }
 
-.all-tags-block-outline {
-  font-size: 17px;
-  right: -2%;
-  
+  .all-tags-block-outline {
+    font-size: 17px;
+    right: -2%;
 
-}
 
-.badge-secondary {
-  background-color: #c0c0c0;
-}
+  }
 
+  .badge-secondary {
+    background-color: #c0c0c0;
+  }
 
 
 </style>

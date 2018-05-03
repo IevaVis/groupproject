@@ -1,17 +1,20 @@
 
 
 <div class="jumbotron w3-container " style="margin-bottom: 30px; margin-top: 0; background-image: url( KL.png); ">
-	
+
   <h1 class="display-4">Real News Matter</h1>
   <p class="lead">Important news should be substantiated</p>
   <hr class="my-4">
   <p><strong>With an army of experts and academics as a part of our network, we make sure your news gets substantiated. All you need to do is share a link of an article you are interested in and our experts will point you to resources which are relevent to the news posted.</strong></p>
-  
+
 
 </div>
+
 <!-- render page --><!-- render page --><!-- render page --><!-- render page --><!-- render page -->
-<div class="container-fluid">
-<p class="posted-articles">Recently Added Articles</p>
+
+<div id="below-jumbotron" class="container-fluid">
+	<%= render partial: "articles/new_article_button" %>
+	<p class="posted-articles">Recently Added Articles</p>
 </div>
 
 <%= render template: "articles/index" %>
@@ -32,10 +35,7 @@
   font-weight: 700;
   font-size: 20px;
   color: grey;
-  
+
 }
 
 </style>
-
-
-

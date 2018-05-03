@@ -10,9 +10,9 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
-      <a class="navbar-brand" href="/">*AppName*</a>
+      <a class="navbar-brand" href="/">Medius</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,38 +34,7 @@
 <!--
       Post new article -->
 
-<% if signed_in? %>
 
-  <div class="post-new-article">
-    <div data-toggle="modal", data-target="#addarticleModal", class="btn btn-danger">New Article</div>
-      <%= render 'articles/form', article: Article.new %>
-  </div>
-
-<% else %>
-
-  <div class="post-new-article">
-    <div data-toggle="modal", data-target="#addarticleModal", class="btn btn-danger">New Article</div>
-  </div>
-
-  <div id="addarticleModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Sign in or Sign up!</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <div class="modal-body">
-          <p>You have to be logged in to continue!</p>
-        </div>
-
-        <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
 </div>
 
         <ul class="navbar-nav ml-auto li-centering-navbar">
@@ -99,17 +68,16 @@
 
 
                         <!-- dropdown-menu --><!-- dropdown-menu -->
-                        <li> <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#"></a>
+                        <li> <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"></a>
 
                         <ul class="dropdown-menu dropdown-menu-right">
 
-                              <li><%= link_to "Profiles", user_path(current_user), class: 'dropdown-item' %></li>
+                              <li><%= link_to "Profile", user_path(current_user), class: 'dropdown-item' %></li>
                               <li>
                                 <!-- Sign Out button -->
                                   <% if signed_in? -%>
-                                  <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
+                                    <%= link_to t(".sign_out"), session_path, method: :delete , class: 'dropdown-item'  %>
                                   <% end %>
-
                               </li>
                         </ul>
                         </li>
