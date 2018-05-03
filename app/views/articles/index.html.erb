@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-10">
       <div class="row">
-      <% @articles.each do |article| %>
-        <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
+        <% @articles.each do |article| %>
+          <% if (signed_in? && current_user.expert?) || article.is_active? || (signed_in? && article.user_id == current_user.id) %>
 
         <div class=" article col-md-4">
           <%= content_tag :div, class: ["article-outline", article.is_active? ? "article-active" : "article-inactive"] do -%>
@@ -33,6 +33,28 @@
             </div>
           
                <% if article.posts.length >= 1 %>
+            <% post = article.posts.first %>
+            <br>
+            <div class="article-first-post">
+              <div class="article-first-post-heading">First Post</div>
+              <div class="post-details row">
+                <span class="col-md-6">
+                  <a href="/users/<%= post.user.id %>">
+                  <span><%= image_tag !User.find(post.user_id).avatar.url.nil? ? User.find(post.user_id).avatar.url : "/assets/defaultpicture.png", height: "40", width: "40", style: "border-radius: 40px;" %></span>
+                  <span><%= "#{post.user.name}" %></span>
+                </a>
+                </span>
+                <span class="col-md-1"></span>
+                <span class="col-md-5"><%= post.created_at.asctime %></span>
+              </div>
+              <!-- <br> -->
+              <div class="post-text">
+                <%= simple_format post.text %>
+              </div>
+            </div>
+          <% end %>
+
+            <% if article.posts.length >= 1 %>
             <% post = article.posts.first %>
             <br>
             <div class="article-first-post">
@@ -87,6 +109,7 @@
     margin-bottom: 10px;
   }
 
+
   .article-first-post {
     position: relative;
     padding: 4px;
@@ -101,6 +124,7 @@
     overflow: auto;
     text-overflow: ellipsis;
   }
+
 
   .article-first-post-heading {
     border-bottom-style: solid;
